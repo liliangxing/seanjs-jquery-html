@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a8a9292f-bdb7-4597-946c-28f77b3d2fba" name="test" url="http://www.we-top.cn">
+        <fileTransfer host="xingli.w58.cndns5.com" port="21" rootFolder="/xingli/wwwroot">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
