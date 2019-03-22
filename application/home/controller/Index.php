@@ -67,10 +67,8 @@ class Index extends Common {
                 if ($list->isEmpty()) {
                     $fantizi= FanJianConvert::simple2tradition($keyword);
                     $where = str_replace($keyword,$fantizi,$where);
-                    $list = model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
-                    if ($list->isEmpty()) {
-                        continue;
-                    }
+                    $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
+                    continue;
                 } else {
                     break;
                 }
