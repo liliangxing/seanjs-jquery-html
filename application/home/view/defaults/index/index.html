@@ -43,7 +43,6 @@
             <div class="ui segment">
                 <a  href="{$columList.aboutus.url}" class="ui top attached large  label blue">{$columList.aboutus.title}</a>
                 <div class="aboutBox">
-                    <img class="ui small left floated image" src="__UPLOAD__/{$columList.aboutus.cover}" alt="{$columList.aboutus.title}">
                     {uk:find table="column" field="meta_description"  key="1"}
                     <p>{:msubstr($info.meta_description,0,225)}</p>
                     {/uk:find}
@@ -58,7 +57,7 @@
             </div>
             <div class="ui bottom attached active tab segment" data-tab="first">
                 <div class="ui divided  items">
-                    {uk:select table="article" field="id,cname,title,color,description,cover,create_time"  limit="2"  cid="6"}
+                    {uk:select table="article" field="id,cname,title,color,description,cover,create_time"  limit="8"  cid="13"}
                     <div class="item">
                         {if $vo.cover.path}
                         <div class="ui small image">
