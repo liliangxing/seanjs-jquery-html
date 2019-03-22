@@ -70,6 +70,8 @@ class Index extends Common {
                     $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
                     if ($list->isEmpty()) {
                         continue;
+                    }else {
+                         break;
                     }
                 } else {
                     break;
