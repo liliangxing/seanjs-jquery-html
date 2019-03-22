@@ -3,6 +3,7 @@
 namespace app\home\controller;
 
 use think\Db;
+use str\FanJianConvert;
 
 class Index extends Common {
 
@@ -43,6 +44,12 @@ class Index extends Common {
             $where = '(' . substr($where, 0, -4) . ') ';
             $where .= " and status='1'";
             $list = model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
+            if ($list->isEmpty()) {
+                $fantizi= FanJianConvert::simple2tradition($keyword);
+                $where = str_replace($keyword,$fantizi,$where);
+                $list = model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
+
+            }
         } else {
             foreach ($modellist as $key => $vo) {
                 $mid=$key;
