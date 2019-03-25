@@ -22,6 +22,7 @@ class FanJianConvert{
       $match=mb_strpos(FanJianConvert::$sd,$str,null,'UTF-8');
       $traditionalCN.=($match!==false )?mb_substr(FanJianConvert::$td,$match,1,'UTF-8'):$str;
     }
+
     return $traditionalCN;
   }
 }

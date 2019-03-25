@@ -65,7 +65,14 @@ class Index extends Common {
                 $where .= " and status='1'";
                 $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
                 if ($list->isEmpty()) {
-                    continue;
+                    $fantizi= FanJianConvert::simple2tradition($keyword);
+                    $where = str_replace($keyword,$fantizi,$where);
+                    $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
+                    if ($list->isEmpty()) {
+                        continue;
+                    }else {
+                         break;
+                    }
                 } else {
                     break;
                 }
