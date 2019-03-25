@@ -3,6 +3,7 @@
 namespace app\home\controller;
 
 use think\Db;
+use str\FanJianConvert;
 
 class Column extends Common {
 
@@ -71,15 +72,27 @@ class Column extends Common {
                     $this->assign('fieldList', $fieldList);
                 }
                 $where = "status='1' and create_time <" . time();
+
+                //条件输出变量
+                $conditionParam = [];
+                $param = paramdecode($condition);
+                $keyword=$param['searchText'];
+                if (!empty($keyword)) {
+                    $where.=" and (title like '%$keyword%' or content like '%$keyword%')";
+                    if($name=="kezhu") {
+                        $fantizi = FanJianConvert::simple2tradition($keyword);
+                        $where = str_replace($keyword, $fantizi, $where);
+                        $this->assign('fantizi', $fantizi);
+                    }
+                }
+
                 //处理栏目列表筛选参数
                 $param = [];
                 if (isset($columnInfo['condition'])) {
                     $parr = explode(',', $columnInfo['condition']);
                     $pstr = "'" . str_replace(',', "','", $columnInfo['condition']) . "'";
                     $fieldInfo = model('ModelField')->getFieldList($columnInfo['model_id'], null, '', "status='1' and name in($pstr)", 'name,type,options,jsonrule,value,title');
-                    //条件输出变量
-                    $conditionParam = [];
-                    $param = paramdecode($condition);
+
                     foreach ($parr as $vo) {
                         if (!empty($vo)) {
                             //判断是否是单选条件
