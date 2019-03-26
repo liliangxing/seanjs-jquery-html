@@ -209,12 +209,12 @@ class Column extends Common {
         //更新点击量
         Db::name($modelTable)->where('id', $id)->inc('hits')->update();
         //下一篇
-        $nextInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and create_time>'$data[create_time]'", 'id,cname,title', '', 'create_time');
+        $nextInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and id>'$data[id]'", 'id,cname,title', '', 'create_time');
         if (!empty($nextInfo)) {
             $this->assign('next', ['title' => $nextInfo['title'], 'url' => $nextInfo['url']]);
         }
         //上一篇
-        $prevInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and create_time<'$data[create_time]'", 'id,cname,title', '', 'create_time desc');
+        $prevInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and id<'$data[id]'", 'id,cname,title', '', 'create_time desc');
         if (!empty($prevInfo)) {
             $this->assign('prev', ['title' => $prevInfo['title'], 'url' => $prevInfo['url']]);
         }
