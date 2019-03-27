@@ -186,6 +186,9 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
+        if($_GET[act]=='edit'){
+            return $this->edit($name,$id);
+        }
         $result = $this->validate(['columnName' => $name, 'id' => $id], ['columnName|栏目标识' => 'require|alpha', 'id|文档ID' => 'require|number']);
         if (true !== $result) {
             abort(404, $result);
@@ -229,12 +232,12 @@ class Column extends Common {
         return $this->display('column/content/' . $columnInfo['template_content']);
     }
 
-    public function edit($cname = '', $id = 0)
+    protected function edit($cname = '', $id = 0)
     {
         if (empty($cname)) {
             $this->error('参数错误~');
         }
-        $columnInfo = Db::view('column', 'title,model_id')
+        $columnInfo = Db::view('column', 'name,title,model_id')
             ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
             ->where('column.name', $cname)
             ->where('column.status', 1)
@@ -243,9 +246,9 @@ class Column extends Common {
         if (empty($columnInfo)) {
             return $this->error('栏目或内容模型不存在或被冻结');
         }
+        $ModelField = model('ModelField');
         if ($this->request->isPost()) {
             $data = $this->request->post();
-            $ModelField = model('ModelField');
             $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
             try {
                 $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
@@ -261,13 +264,25 @@ class Column extends Common {
             }
             $placeList = Db::name('place')->where('mid', $columnInfo['model_id'])->whereOr('mid', 0)->order('orders,id desc')->column('id,title');
             $fieldList = model('ModelField')->getFieldList($columnInfo['model_id'], $contentId);
+
+
+            $modelTable = $ModelField->getModelInfo($columnInfo['model_id'], 'table');
+            //内容所有字段
+            $data = $ModelField->getDataInfo($modelTable, "id='" . $id . "' and  cname='" . $cname . "' and status='1'", '*', '*');
+            if (empty($data)) {
+                abort(404, '内容不存在或未审核');
+            }
+
             $this->assign([
+                'info' => $columnInfo,
                 'placeList' => $placeList,
                 'fieldList' => $fieldList,
                 'id' => $contentId,
+                'data' => $data,
                 'columnTitle' => $columnInfo['title']
             ]);
-            return $this->fetch();
+
+            return  $this->display('column/content/beizhi_edit');
         }
     }
 

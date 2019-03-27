@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta content="" name="Keywords">
     <meta content="" name="Description">
-    <title>{$seotitle}</title>
+    <title>{$data.title}</title>
     <link rel="shortcut icon" href="/favicon.ico"/>
     <!--[if lte IE 9]>
-    <script src="{pigcms::STATICS}/forum/js/watermark.js"></script><![endif]-->
+    <script src="__STATIC__/home/defaults/forum/js/watermark.js"></script><![endif]-->
     <!--[if IE 7]>
-    <link href="{pigcms::STATICS}/forum/css/font_awesome_ie7.css" rel="stylesheet"/><![endif]-->
+    <link href="__STATIC__/home/defaults/forum/css/font_awesome_ie7.css" rel="stylesheet"/><![endif]-->
 </head>
 <body>
 <!DOCTYPE html>
@@ -27,18 +27,18 @@
     <meta content="telephone=no, address=no" name="format-detection">
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           name="viewport">
-    <link rel="stylesheet" type="text/css" href="{pigcms::STATICS}/forum/css/main.css"></link>
-    <link rel="stylesheet" type="text/css" href="{pigcms::STATICS}/forum/css/dialog.css"></link>
-    <script src="{pigcms::STATICS}/forum/js/jquery_min.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/swipe.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/main.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/dialog_min.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/helper_min.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/pics.js"></script>
-    <script src="{pigcms::STATICS}/forum/js/input.js"></script>
-    <script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
-    <script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
-    <script src="/tpl/static/upyun.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/home/defaults/forum/css/main.css"></link>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/home/defaults/forum/css/dialog.css"></link>
+    <script src="__STATIC__/home/defaults/forum/js/jquery_min.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/swipe.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/main.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/dialog_min.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/helper_min.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/pics.js"></script>
+    <script src="__STATIC__/home/defaults/forum/js/input.js"></script>
+    <script src="__STATIC__/home/defaults/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script src="__STATIC__/home/defaults/artDialog/plugins/iframeTools.js"></script>
+    <script src="__STATIC__/home/defaults/upyun.js"></script>
     <script>
         $().ready(function () {
             form_emotion.rend();
@@ -52,8 +52,8 @@
         function submit() {
             var title = $("#form_title").val();
             var form = document.getElementById("form_1");
-            var article = document.getElementById("form_article").innerHTML;
-            document.getElementById("form_article_hidden").value = article;
+            var article = document.getElementById("content").innerHTML;
+            document.getElementById("content_hidden").value = article;
             if (!title) {
                 alert("请输入标题", 2000);
                 return;
@@ -103,9 +103,9 @@
                             var val = evt.target.getAttribute("data-key").split('_');
                             myInput.listen(this, {
                                 keyCode: -10,
-                                srcElement: document.getElementById("form_article"),
+                                srcElement: document.getElementById("content"),
                                 value: val[2],
-                                imgUrl: '{pigcms::STATICS}/forum/images/' + val[0] + ".gif"
+                                imgUrl: '__STATIC__/home/defaults/forum/images/' + val[0] + ".gif"
                             });
                             this.focus();
                         }
@@ -125,25 +125,27 @@
                 <header>
                     <ul class="tbox">
                         <li>
-                            <a href="{pigcms::U('Beizhi/download',array('token'=>$info['token'],'classid'=>$info['classid']))}"><label
-                                    class="title">{pigcms:$seotitle}</label></a>
+                            <a href="{:url('column/index', ['name' => $info.name])}"><label
+                                    class="title">{$info.title}</label></a>
                         </li>
                         <li class="align_right">
-                            <a href="{pigcms::U('Beizhi/lists',array('token'=>$info['token'],'classid'=>$info['classid']))}"
+                            <a href="{:url('column/index', ['name' => $info.name])}"
                                class="cancel">返回</a>
                         </li>
                     </ul>
                 </header>
                 <input id="form_title" class="form_title" type="text" name="title" maxlength="50" placeholder="标题"
-                       value="{pigcms:$info.title}"/>
-                <input id="form_url" class="form_title" type="text" name="url" maxlength="100"
-                       placeholder="请输入链接的音频\视频地址" value="{pigcms:$info.url}"/>
-                <article id="form_article" contenteditable="true" onpaste="myInput.listen(this, event);"
+                       value="{$data.title}"/>
+                <input class="form_title" type="text" name="video_url" maxlength="100"
+                       placeholder="请输入链接的视频地址" value="{$data.video_url}"/>
+                <input  class="form_title" type="text" name="sound_url" maxlength="100"
+                       placeholder="请输入链接的音频地址" value="{$data.sound_url}"/>
+                <article id="content" contenteditable="true" onpaste="myInput.listen(this, event);"
                          onkeydown="myInput.listen(this, event);" oninput="myInput.listen(this, event);"
                          placeholder="说点什么..." maxlength="10" style="height:240px;">
-                    {pigcms::htmlspecialchars_decode($info['info'],ENT_QUOTES)}
+                    {$data['content']|raw}
                 </article>
-                <input id="form_article_hidden" name="form_article" type="hidden" value="z">
+                <input id="content_hidden" name="content" type="hidden" value="z">
                 <footer>
                     <div class="align_right">
                         <label id="form_count">50000 字</label>
@@ -201,7 +203,7 @@
                                             $('.a_upload').remove();
                                             num++;
                                         }
-                                        upyunWapPicUpload('portrait' + num, 1440, 1440, '{pigcms:$Think.get.token}');
+                                        upyunWapPicUpload('portrait' + num, 1440, 1440, '{$info.name}');
                                     }
 
                                     setInterval(ddshow, 1000);
