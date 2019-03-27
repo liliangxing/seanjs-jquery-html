@@ -189,6 +189,8 @@ class Column extends Common {
     public function content($name = '', $id = 0) {
         if($_GET[act]=='edit'){
             return $this->edit($name,$id);
+        }else if($_GET[act]=='add'){
+            return $this->add($name);
         }
         $result = $this->validate(['columnName' => $name, 'id' => $id], ['columnName|栏目标识' => 'require|alpha', 'id|文档ID' => 'require|number']);
         if (true !== $result) {
@@ -253,6 +255,8 @@ class Column extends Common {
             $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
             $data['modelField']['id']=$id;
             $data['modelField']['title']=$data['title'];
+            $data['modelField']['sound_url']=$data['sound_url'];
+            $data['modelField']['video_url']=$data['video_url'];
             $data['modelField']['content']=$data['content'];
             try {
                 $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
@@ -286,6 +290,54 @@ class Column extends Common {
                 'columnTitle' => $columnInfo['title']
             ]);
 
+            return  $this->display('column/content/beizhi_edit');
+        }
+    }
+
+
+    protected function add($cname = '')
+    {
+        if (empty($cname)) {
+            $this->error('参数错误~');
+        }
+        $columnInfo = Db::view('column', 'title,model_id')
+            ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
+            ->where('column.name', $cname)
+            ->where('column.status', 1)
+            ->where('model.status', 1)
+            ->find();
+        if (empty($columnInfo)) {
+            return $this->error('栏目或内容模型不存在或被冻结');
+        }
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            $ModelField = model('ModelField');
+            $data['modelField']['cname'] = $cname;
+            $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
+
+            $data['modelField']['title']=$data['title'];
+            $data['modelField']['sound_url']=$data['sound_url'];
+            $data['modelField']['video_url']=$data['video_url'];
+            $data['modelField']['content']=$data['content'];
+            $data['modelField']['status']=1;
+
+            try {
+                $ModelField->addModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt']);
+            } catch (\Exception $ex) {
+                $this->error($ex->getMessage());
+            }
+            Cache::clear('db_' . $columnInfo['table']);
+            $this->success('模型内容编辑成功~', url('column/index', ['name' => $cname]));
+
+        } else {
+            $placeList = Db::name('place')->where('mid', $columnInfo['model_id'])->whereOr('mid', 0)->order('orders,id desc')->column('id,title');
+            $fieldList = model('ModelField')->getFieldList($columnInfo['model_id']);
+            $this->assign([
+                'placeList' => $placeList,
+                'fieldList' => $fieldList,
+                'cname' => $cname,
+                'columnTitle' => $columnInfo['title']
+            ]);
             return  $this->display('column/content/beizhi_edit');
         }
     }
