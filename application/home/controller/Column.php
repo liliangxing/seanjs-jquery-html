@@ -4,6 +4,7 @@ namespace app\home\controller;
 
 use think\Db;
 use str\FanJianConvert;
+use think\facade\Cache;
 
 class Column extends Common {
 
@@ -250,13 +251,16 @@ class Column extends Common {
         if ($this->request->isPost()) {
             $data = $this->request->post();
             $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
+            $data['modelField']['id']=$id;
+            $data['modelField']['title']=$data['title'];
+            $data['modelField']['content']=$data['content'];
             try {
                 $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
             } catch (\Exception $ex) {
                 $this->error($ex->getMessage());
             }
             Cache::clear('db_' . $columnInfo['table']);
-            $this->success('模型内容编辑成功~', url($cname));
+            $this->success('模型内容编辑成功~', url('column/index', ['name' => $cname]));
         } else {
             $contentId = intval($id);
             if (!$contentId) {
