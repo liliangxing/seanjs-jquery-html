@@ -1,65 +1,635 @@
-{extend name="defaults/layout"/}
-{block name="seo"}
-<title>{$data.title}-{$info.meta_title}-{$title}</title>	
-<meta name="keywords" content="{$info.meta_keywords},{$keywords}" />
-<meta name="description" content="{$info.meta_description}-{$description}" />
-{/block}
-{block name="toplink"}
-<script>
-    $(document).ready(function () {
-        //栏目右侧折叠菜单
-        $('.ui.styled.accordion').accordion({
-            selector: {
-                trigger: '.title .icon'
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>{$data.title}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=10.0, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <meta name="format-detection" content="telephone=no" />
+
+    <link href="__STATIC__/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #ui-header{position: relative;}
+        #search_close{
+            margin-top: 6px;
+            border-radius: 2px;
+            border: 0px;
+            width: 30px;
+            line-height: 24px;
+            position: fixed;
+            top: 0.3rem;
+            right: 5px;
+            z-index: 3;
+            background: #fff;
+            font-size: 28px;
+            text-align: center;
+        }
+        .highlight { background: yellow; color: red; }
+        .prelight { background: blue; color: white; }
+        #tip { background: #FFFFCC; border: 1px solid #999; width: 200px; text-align: center; display: none; font-size: 12px; }
+        #search_box { text-align:right;height: 30px;  z-index: 4; padding: 0 10px 0 0;}
+        #search_box span a{ text-decoration: underline; padding:1px 12px 1px 0;}
+        #search_btn { background: #0f79be; margin-top: 6px; border-radius: 2px; border: 0px; width: 100px; line-height: 24px; color: white; }
+        #searchstr { font-size: 14px; height: 20px; }
+    </style>
+    <style type="text/css">
+        #goTop{position:fixed;display:none;width:50px;height:48px;background:rgba(255,255,255,0.4) url('__STATIC__/home/defaults/gotop.png') no-repeat 0px 0px;border:solid 1px #f9f9f8;border-radius:6px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.2);cursor:pointer;z-index:99999;}
+        #goTop:hover{height:50px;background-position:16px 16px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.3)}
+    </style>
+    <div style="position:relative;">
+        <div id="goTop" class="goTop"></div>
+
+    </div>
+    <script type="text/javascript" src="__STATIC__/jquery.min.js"></script>
+
+
+    <script>
+        var scrollFlag=true;
+        var canScrollFlag=false;
+        $(window).scroll(function(){
+            var sc=$(window).scrollTop();
+            var rwidth=$(window).width()+$(document).scrollLeft();
+            var rheight=$(window).height()+$(document).scrollTop();
+            if(scrollFlag){
+                document.cookie = "scrollTop{$_GET['id']}=" + sc;
+            }
+            if(sc>$(window).height()/2){
+                $("#goTop").css("display","block");
+                $("#goTop").css("right",(6)+"px");
+                $("#goTop").css("bottom",(6)+"px");
+
+
+                if(!scrollFlag && canScrollFlag)
+                {
+                    scrollFlag=true;
+                }
+            }else{
+                $("#goTop").css("display","none");
+
+                if(sc<20 && $("#search_btn").css("position")=="fixed")
+                {
+                    $("#search_btn").val("页内查找");
+                    $("#search_btn").css("position","static");
+
+                    $("#search_close").hide();
+                }
+
             }
         });
-        //tab切换
-        $('#comment  .item').tab();
-    });
-</script>
-{/block}
-{block name="content"}
-<div class="ui  padded grid " id="listBanner">
-    <div class="grey column">
-        <div class="ui container ">
-            <h3>{$info.title}</h3>
-            <p>{$info.meta_description}</p>
-        </div>  
+        $("#goTop").click(function(){
+            scrollFlag=false;
+            $('body,html').animate({scrollTop:0},100);
+
+            setTimeout(function(){
+                canScrollFlag=true;
+            }, 200);
+
+        });
+
+        window.onload = function ()
+        {
+
+            if (document.cookie.match(/scrollTop{$_GET['id']}=([^;]+)(;|$)/) != null) {
+                var arr = document.cookie.match(/scrollTop{$_GET['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+                document.body.scrollTop = parseInt(arr[1]);
+            }
+
+            var oWin = document.getElementById("win");
+
+            var oLay = document.getElementById("overlay");
+
+            var oBtn = document.getElementById("popmenu");
+
+            var oClose = document.getElementById("close");
+
+            var right_nav = document.getElementById("right_nav");
+            var right_nav_click = document.getElementById("right_nav_click");
+
+            right_nav_click.onclick = function ()
+
+            {
+
+                right_nav.style.display = "block";
+
+                right_nav_click.style.display = "none"
+
+            };
+
+            oBtn.onclick = function ()
+
+            {
+
+                oLay.style.display = "block";
+
+                oWin.style.display = "block"
+
+            };
+
+            oLay.onclick = function ()
+
+            {
+
+                oLay.style.display = "none";
+
+                oWin.style.display = "none"
+
+            }
+
+        };
+    </script>
+    <script type="text/javascript">
+        (function($) {
+            $.fn.fixDiv = function(options) {
+                var defaultVal = {
+                    top: 10
+                };
+                var obj = $.extend(defaultVal, options);
+                $this = this;
+                var _top = $this.offset().top;
+                var _left = $this.offset().left;
+                $(window).scroll(function() {
+                    var _currentTop = $this.offset().top;
+                    var _scrollTop = $(document).scrollTop();
+                    if (_scrollTop > _top) {
+                        $this.offset({
+                            top: _scrollTop + obj.top,
+                            left: _left
+                        });
+                    } else {
+                        $this.offset({
+                            top: _top,
+                            left: _left
+                        });
+                    }
+                });
+                return $this;
+            };
+        })(jQuery);
+        $(function(){
+            //$("#search_box").fixDiv({ top: 0 });
+            $('#search_close').click(function (e) {
+                $(this).hide();
+                $("#search_btn").val("页内查找");
+                $("#search_btn").css("position","static");
+            })
+
+            $('#search_btn').click(highlight);//点击search时，执行highlight函数；
+            $('#searchstr').val(unescape("{$_GET[searchText]}"));
+            $('#searchstr').keydown(function (e) {
+                var key = e.which;
+                if (key == 13) highlight();
+            })
+
+            var i = 0;
+            var sCurText;
+            function highlight(){
+                clearSelection();//先清空一下上次高亮显示的内容；
+
+                var flag = 0;
+                var bStart = true;
+
+
+                $('#tip').text('');
+                $('#tip').hide();
+                var searchText = $('#searchstr').val();
+                var _searchTop = $('#searchstr').offset().top+30;
+                var _searchLeft = $('#searchstr').offset().left;
+                if($.trim(searchText)==""){
+                    //alert(123);
+                    showTips("请输入查找内容",_searchTop,3,_searchLeft);
+                    return;
+                }
+
+
+                var searchText = $('#searchstr').val();//获取你输入的关键字；
+                var regExp = new RegExp(searchText, 'g');//创建正则表达式，g表示全局的，如果不用g，则查找到第一个就不会继续向下查找了；
+                var content = $("#content").text();
+                if (!regExp.test(content)) {
+                    showTips("没有找到要查找的内容",_searchTop,3,_searchLeft);
+                    return;
+                } else {
+                    if (sCurText != searchText) {
+                        i = 0;
+                        sCurText = searchText;
+                    }
+                }
+
+                $('#content p,#content div').each(function(){
+                    var html = $(this).html();
+                    var newHtml = html.replace(regExp, '<span class="highlight">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
+
+                    $(this).html(newHtml);//更新；
+                    flag = 1;
+                });
+
+
+
+                if (flag == 1) {
+                    if ($(".highlight").length> 1) {
+                        var _top = $(".highlight").eq(i).offset().top+$(".highlight").eq(i).height();
+                        var _tip = $(".highlight").eq(i).parent().find("strong").text();
+                        if(_tip=="") _tip = $(".highlight").eq(i).parent().parent().find("strong").text();
+                        var _left = $(".highlight").eq(i).offset().left;
+                        var _tipWidth = $("#tip").width();
+                        if (_left > $(document).width() - _tipWidth) {
+                            _left = _left - _tipWidth;
+                        }
+                        $("#tip").html(_tip).show();
+                        $("#tip").offset({ top: _top, left: _left });
+                        $("#search_btn").val("下一个 "+(i+1)+"/"+$(".highlight").length+"");
+                        $("#search_btn").css("position","fixed");
+                        $("#search_btn").css("top","0.3rem");
+                        $("#search_btn").css("right","40px");
+                        $("#search_btn").css("z-index","3");
+
+                        $("#search_close").show();
+                    }else{
+                        var _top = $(".highlight").offset().top+$(".highlight").height();
+                        var _tip = $(".highlight").parent().find("strong").text();
+                        var _left = $(".highlight").offset().left;
+                        $('#tip').show();
+                        $("#tip").html(_tip).offset({ top: _top, left: _left });
+                    }
+                    $("html, body").animate({ scrollTop: _top - 92 });
+                    i++;
+                    if (i > $(".highlight").length - 1) {
+                        i = 0;
+                    }
+                }
+            }
+            function clearSelection(){
+                $('#content p,#content div').each(function(){
+                    //找到所有highlight属性的元素；
+                    $(this).find('.highlight').each(function(){
+                        $(this).replaceWith($(this).html());//将他们的属性去掉；
+                    });
+                });
+            }
+
+
+        })
+        //mask
+        var tipsDiv = '<div class="tipsClass"></div>';
+        $( 'body' ).append( tipsDiv );
+        function showTips( tips, height, time,left ){
+            var windowWidth = document.documentElement.clientWidth;
+            $('.tipsClass').text(tips);
+            $( 'div.tipsClass' ).css({
+                'top' : height + 'px',
+                'left' :left + 'px',
+                'position' : 'absolute',
+                'padding' : '8px 6px',
+                'background': '#000000',
+                'font-size' : 14 + 'px',
+                'font-weight': 900,
+                'margin' : '0 auto',
+                'text-align': 'center',
+                'width' : 'auto',
+                'z-index':'4',
+                'color' : '#fff',
+                'border-radius':'2px',
+                'opacity' : '0.8' ,
+                'box-shadow':'0px 0px 10px #000',
+                '-moz-box-shadow':'0px 0px 10px #000',
+                '-webkit-box-shadow':'0px 0px 10px #000'
+            }).show();
+            setTimeout( function(){$( 'div.tipsClass' ).fadeOut();}, ( time * 1000 ) );
+        }
+        /**/
+    </script>
+</head>
+
+<body id="news">
+
+<div id="ui-header">
+
+    <div class="fixed">
+
+        <a class="ui-title" id="popmenu">栏目导航</a>
+
+        <div class="ui-btn-left_pre"></div>
+
+        <div  style="display:none" id='right_nav'>
+            <a class="ui-btn-right_home"
+               style="background: url('__STATIC__/home/defaults/img/editpage32.png') no-repeat center center;background-size:24px auto;"
+               href="?act=edit"></a>
+            <a class="ui-btn-right_home"
+               style="background: url('__STATIC__/home/defaults/img/add_up.png') no-repeat center center;background-size:24px auto;right:15%"
+               href="?act=add"></a>
+        </div>
+
+        <a class="ui-btn-right_home" style="background: none" id='right_nav_click'></a>
+
     </div>
+
 </div>
 
-<div class="ui container" id="box">
-    <div class="ui  grid stackable">
-        <div class="ten wide column">
-            <div class="ui  breadcrumb">
-                <a class="section" href="{:url('index/index')}"> 首页</a>
-                {volist name="crumbs" id="vo"}
-                <i class="right chevron icon divider"></i><a class="section" href="{$vo.url}"> {$vo.title}</a>
-                {/volist}
+<div id="overlay"></div>
+
+<div id="win">
+
+    <ul class="dropdown">
+
+
+
+            <li><a href="#"><span>栏目</span></a>
+            </li>
+
+
+        <div class="clr"></div>
+
+    </ul>
+
+</div>
+
+
+<div id="search_box">
+    <span><script type="text/javascript" src="__STATIC__/home/defaults/language_all.js"></script></span>
+    <input class="textbox" id="searchstr" type="text" size="11" name="searchstr"/>　
+    <input class="sbttn" id="search_btn" type="button" value="页内查找"/>
+    <div id="search_close" style="display:none">×</div>
+</div>
+<div id="tip"></div>
+
+<div class="Listpage">
+
+    <div class="page-bizinfo">
+
+
+        <div class="header" style="position: relative; margin:10px 0 0px 0; padding-bottom:20px;">
+
+            <h1 id="activity-name">{$data.title}</h1>
+
+            <span id="post-date">{:date('Y-m-d H:i:s',$data.create_time)}</span>
+
+            <div style="background: url('__STATIC__/home/defaults/img/next.png') no-repeat ;background-size:30px auto;position:absolute; right:2px;bottom:0px; width:30px; height:40px; z-index:10 "
+                 id='next_click'></div>
+            <div style="background: url('__STATIC__/home/defaults/img/prev.png') no-repeat ;background-size:30px auto;position:absolute; right:60px;bottom:0px; width:30px; height:40px; z-index:10 "
+                 id='pre_click'></div>
+        </div>
+
+        {if $_GET[playVideo] eq '1'}
+
+            <link href="__STATIC__/home/defaults/projekktor/style.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="__STATIC__/home/defaults/projekktor/projekktor-1.2.24r216.min.js"></script>
+            <video id="player_a" class="projekktor" poster="__STATIC__/home/defaults/projekktor/intro.png"
+                   title="{$data.title}" width="100%" height="385" controls>
+                <source src="{$data.video_url}" type="video/mp4"/>
+            </video>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    projekktor('#player_a'); // instantiation
+                });
+            </script>
+
+            <div class="text_down" style="margin-top:4px;">下载地址：<br/>
+                <a href="{$data.video_url}">{$data.video_url}</a> <br/>(请用在新的浏览器打开下载)
             </div>
 
-            <div class="ui segment">
-                <h4 class="ui header">{$data.title}</h4>
-                <div class="contentInfo"><i class="time icon"></i>{:date('Y-m-d H:i:s',$data.create_time)}&nbsp&nbsp&nbsp<i class="unhide icon"></i> {$data.hits} &nbsp&nbsp&nbsp <i class="write icon"></i>{$data.source}</div>
-                <div class="ui divider"></div>
-                <div>{$data.content|raw}</div>
-                <div class="ui horizontal divider">相关信息 </div>
+        {/if}
 
-                <div class="ui relaxed list">
-                    <div class="item">
-                        上一篇： {empty name="prev"}没有了 ...{else}<a href="{$prev.url}">{$prev.title}</a>{/empty}
+        {if $_GET[playSound] eq '1'}
+            <link href="__STATIC__/home/defaults/jplayer/blue.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="__STATIC__/home/defaults/jplayer/jquery.jplayer.js"></script>
+
+            <script>
+                //<![CDATA[
+                $(document).ready(function(){
+                    $("#jquery_jplayer_1").jPlayer({
+                        ready: function (event) {
+                            $(this).jPlayer("setMedia", {
+                                mp3:"{$data.sound_url}" //mp3的播放地址
+                            }).jPlayer("play");
+                        },
+                        timeupdate: function(event) {
+                            if(event.jPlayer.status.currentTime==0){
+                                time = "";
+                            }else {
+                                time = event.jPlayer.status.currentTime;
+                            }
+                        },
+                        play: function(event) {
+                            //点击开始方法调用lrc。start歌词方法 返回时间time
+
+                            return time;
+
+                        },
+                        ended:function(event){
+                            $("#lrc_list").removeAttr("style").html("<li>歌曲播放完毕！</li>");
+                        },
+                        swfPath: "/js",  		//存放jplayer.swf的决定路径
+                        solution:"html, flash", //支持的页面
+                        supplied: "mp3",		//支持的音频的格式
+                        wmode: "window"
+                    });
+                });
+                //]]>
+            </script>
+            <div style="text-align:center; margin:10px 0 0 0;">
+            </div>
+    <div class="music_box">
+        <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+        <div id="jp_container_1" class="jp-audio">
+            <div class="jp-type-single">
+                <div class="jp-gui jp-interface">
+                    <ul class="jp-controls">
+                        <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                        <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                    </ul>
+                    <div class="jp-progress">
+                        <div class="jp-seek-bar">
+                            <div class="jp-play-bar"></div>
+                        </div>
                     </div>
-                    <div class="item">
-                        下一篇： {empty name="next"}没有了 ...{else}<a href="{$next.url}">{$next.title}</a>{/empty}
+                    <div class="jp-volume-bar">
+                        <div class="jp-volume-bar-value"></div>
+                    </div>
+                    <div class="jp-time-holder">
+                        <div class="jp-current-time"></div>
+                        <div class="jp-duration"></div>
+                        <ul class="jp-toggles">
+                            <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                            <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                        </ul>
                     </div>
                 </div>
-                {include file="defaults/comment" /}
             </div>
         </div>
-
-        <div class="six wide column" id="rightComun">
-            {include file="defaults/right" /}
-        </div>
     </div>
+    <div class="text_down">mp3下载地址：<br/>
+        <a href="{$data.sound_url}">{$data.sound_url}</a> <br/>(请用在新的浏览器打开下载)
+    </div>
+{/if}
+        {if $_GET[playVideo] neq '1'}
+        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playVideo=1">点击进入视频</a>
+        {/if}
+        {if $_GET[playSound] neq '1'}
+        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playSound=1">点击进入mp3</a>
+        {/if}
+
+    <div class="text" id="content">
+
+            <p>
+            </p>
+
+        <p>
+
+            {$data.content|raw}
+        </p>
+        <p>&nbsp;</p>
+
+
+    </div>
+
 </div>
-{/block}
+
+
+
+<div class="list">
+
+    <div id="olload">
+
+        <a href="#"><span>往期回顾</span></a>
+
+    </div>
+
+
+    <div id="oldlist">
+
+        <ul>
+
+
+
+                <li class="newsmore">
+
+                    <!--在整合列表页和分类也的时候，这里修改过模板-->
+
+                    <a href="#">
+
+                        <div class="olditem">
+
+                            <div class="title">文章</div>
+
+                        </div>
+
+                    </a>
+
+                </li>
+
+
+        </ul>
+
+        <a class="more" href="#">更多精彩内容</a>
+
+
+    </div>
+
+</div>
+
+
+    <a class="more_col" href="#"><span>栏目</span></a>
+
+
+<a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
+
+<script>
+   StranBody();
+
+    $("#content img").click(function(){
+        var imgArray = [];
+        var curImageSrc = canonical_uri($(this).attr('src'),"{C('site_url')}/");
+        console.log(curImageSrc);
+        var oParent = $(this).parent();
+        if (curImageSrc && !oParent.attr('href')) {
+            $('#content img').each(function(index, el) {
+                var itemSrc = canonical_uri($(this).attr('src'),"{C('site_url')}/");
+                imgArray.push(itemSrc);
+            });
+            wx.previewImage({
+                current: curImageSrc,
+                urls: imgArray
+            });
+        }
+    });
+    function canonical_uri(src, base_path)
+    {
+        var root_page = /^[^?#]*\//.exec(location.href)[0],
+            root_domain = /^\w+\:\/\/\/?[^\/]+/.exec(root_page)[0],
+            absolute_regex = /^\w+\:\/\//;
+
+        // is `src` is protocol-relative (begins with // or ///), prepend protocol
+        if (/^\/\/\/?/.test(src))
+        {
+            src = location.protocol + src;
+        }
+        // is `src` page-relative? (not an absolute URL, and not a domain-relative path, beginning with /)
+        else if (!absolute_regex.test(src) && src.charAt(0) != "/")
+        {
+            // prepend `base_path`, if any
+            src = (base_path || "") + src;
+        }
+
+        // make sure to return `src` as absolute
+        return absolute_regex.test(src) ? src : ((src.charAt(0) == "/" ? root_domain : root_page) + src);
+    }
+    $(".ui-btn-left_pre").click(function(){
+        var   backUrl="#";
+
+        if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){ // IE
+            if(history.length > 0){
+                window.history.go( -1 );
+            }else{
+                window.location.href =backUrl;
+            }
+        }else{ //非IE浏览器
+            if (navigator.userAgent.indexOf('Firefox') >= 0 ||
+                navigator.userAgent.indexOf('Opera') >= 0 ||
+                navigator.userAgent.indexOf('Safari') >= 0 ||
+                navigator.userAgent.indexOf('Chrome') >= 0 ||
+                navigator.userAgent.indexOf('WebKit') >= 0){
+
+                if(window.history.length > 1){
+                    window.history.go( -1 );
+                }else{
+                    window.location.href =backUrl;
+                }
+            }else{ //未知的浏览器
+                window.history.go( -1 );
+            }
+        }
+
+
+
+    });
+
+
+
+    $('#next_click').on('click',function(){
+        {empty name="next"}
+        showTips("没有了", $('#next_click').offset().top+30,2, $('#next_click').offset().left-20);
+        {else}
+        location.href="{$next.url}";
+        {/empty}
+
+    });
+
+
+    $('#pre_click').on('click',function(){
+        {empty name="prev"}
+        showTips("没有了", $('#pre_click').offset().top+30,2, $('#pre_click').offset().left);
+        {else}
+        location.href="{$prev.url}";
+        {/empty}
+    });
+</script>
+</body>
+
+</html>

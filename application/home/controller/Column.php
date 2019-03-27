@@ -4,6 +4,7 @@ namespace app\home\controller;
 
 use think\Db;
 use str\FanJianConvert;
+use think\facade\Cache;
 
 class Column extends Common {
 
@@ -186,6 +187,11 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
+        if($_GET[act]=='edit'){
+            return $this->edit($name,$id);
+        }else if($_GET[act]=='add'){
+            return $this->add($name);
+        }
         $result = $this->validate(['columnName' => $name, 'id' => $id], ['columnName|栏目标识' => 'require|alpha', 'id|文档ID' => 'require|number']);
         if (true !== $result) {
             abort(404, $result);
@@ -209,12 +215,12 @@ class Column extends Common {
         //更新点击量
         Db::name($modelTable)->where('id', $id)->inc('hits')->update();
         //下一篇
-        $nextInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and create_time>'$data[create_time]'", 'id,cname,title', '', 'create_time');
+        $nextInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and id>'$data[id]'", 'id,cname,title', '', 'id');
         if (!empty($nextInfo)) {
             $this->assign('next', ['title' => $nextInfo['title'], 'url' => $nextInfo['url']]);
         }
         //上一篇
-        $prevInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and create_time<'$data[create_time]'", 'id,cname,title', '', 'create_time desc');
+        $prevInfo = $ModelField->getDataInfo($modelTable, "status='1' and cname='$name' and id<'$data[id]'", 'id,cname,title', '', 'id desc');
         if (!empty($prevInfo)) {
             $this->assign('prev', ['title' => $prevInfo['title'], 'url' => $prevInfo['url']]);
         }
@@ -227,6 +233,113 @@ class Column extends Common {
             'parentName' => $columnInfo['name'],
         ]);
         return $this->display('column/content/' . $columnInfo['template_content']);
+    }
+
+    protected function edit($cname = '', $id = 0)
+    {
+        if (empty($cname)) {
+            $this->error('参数错误~');
+        }
+        $columnInfo = Db::view('column', 'name,title,model_id')
+            ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
+            ->where('column.name', $cname)
+            ->where('column.status', 1)
+            ->where('model.status', 1)
+            ->find();
+        if (empty($columnInfo)) {
+            return $this->error('栏目或内容模型不存在或被冻结');
+        }
+        $ModelField = model('ModelField');
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
+            $data['modelField']['id']=$id;
+            $data['modelField']['title']=$data['title'];
+            $data['modelField']['sound_url']=$data['sound_url'];
+            $data['modelField']['video_url']=$data['video_url'];
+            $data['modelField']['content']=$data['content'];
+            try {
+                $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
+            } catch (\Exception $ex) {
+                $this->error($ex->getMessage());
+            }
+            Cache::clear('db_' . $columnInfo['table']);
+            $this->success('模型内容编辑成功~', url('column/index', ['name' => $cname]));
+        } else {
+            $contentId = intval($id);
+            if (!$contentId) {
+                $this->error('参数错误cid~');
+            }
+            $placeList = Db::name('place')->where('mid', $columnInfo['model_id'])->whereOr('mid', 0)->order('orders,id desc')->column('id,title');
+            $fieldList = model('ModelField')->getFieldList($columnInfo['model_id'], $contentId);
+
+
+            $modelTable = $ModelField->getModelInfo($columnInfo['model_id'], 'table');
+            //内容所有字段
+            $data = $ModelField->getDataInfo($modelTable, "id='" . $id . "' and  cname='" . $cname . "' and status='1'", '*', '*');
+            if (empty($data)) {
+                abort(404, '内容不存在或未审核');
+            }
+
+            $this->assign([
+                'info' => $columnInfo,
+                'placeList' => $placeList,
+                'fieldList' => $fieldList,
+                'id' => $contentId,
+                'data' => $data,
+                'columnTitle' => $columnInfo['title']
+            ]);
+
+            return  $this->display('column/content/beizhi_edit');
+        }
+    }
+
+
+    protected function add($cname = '')
+    {
+        if (empty($cname)) {
+            $this->error('参数错误~');
+        }
+        $columnInfo = Db::view('column', 'title,model_id')
+            ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
+            ->where('column.name', $cname)
+            ->where('column.status', 1)
+            ->where('model.status', 1)
+            ->find();
+        if (empty($columnInfo)) {
+            return $this->error('栏目或内容模型不存在或被冻结');
+        }
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            $ModelField = model('ModelField');
+            $data['modelField']['cname'] = $cname;
+            $data['modelFieldExt'] = isset($data['modelFieldExt']) ? $data['modelFieldExt'] : [];
+
+            $data['modelField']['title']=$data['title'];
+            $data['modelField']['sound_url']=$data['sound_url'];
+            $data['modelField']['video_url']=$data['video_url'];
+            $data['modelField']['content']=$data['content'];
+            $data['modelField']['status']=1;
+
+            try {
+                $ModelField->addModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt']);
+            } catch (\Exception $ex) {
+                $this->error($ex->getMessage());
+            }
+            Cache::clear('db_' . $columnInfo['table']);
+            $this->success('模型内容编辑成功~', url('column/index', ['name' => $cname]));
+
+        } else {
+            $placeList = Db::name('place')->where('mid', $columnInfo['model_id'])->whereOr('mid', 0)->order('orders,id desc')->column('id,title');
+            $fieldList = model('ModelField')->getFieldList($columnInfo['model_id']);
+            $this->assign([
+                'placeList' => $placeList,
+                'fieldList' => $fieldList,
+                'cname' => $cname,
+                'columnTitle' => $columnInfo['title']
+            ]);
+            return  $this->display('column/content/beizhi_edit');
+        }
     }
 
 }
