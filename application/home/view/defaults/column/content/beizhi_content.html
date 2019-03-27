@@ -314,18 +314,13 @@
 
         <div class="ui-btn-left_pre"></div>
 
-        <if condition="$res.token eq 'cvrzdf1458196053'"></if>
-        <div style="display:none" id='right_nav'>
+        <div  id='right_nav'>
             <a class="ui-btn-right_home"
-               style="background: url('__STATIC__/home/defaults/img/as_alias.png') no-repeat center center;background-size:24px auto;"
-               href="{pigcms::U('Beizhi/edit',array('token'=>$res['token'],'id'=>$res['id']))}"></a>
+               style="background: url('__STATIC__/home/defaults/img/editpage32.png') no-repeat center center;background-size:24px auto;"
+               href="{:url('column/edit',array('cname'=>$info['name'],'id'=>$data['id']))}"></a>
             <a class="ui-btn-right_home"
                style="background: url('__STATIC__/home/defaults/img/add_up.png') no-repeat center center;background-size:24px auto;right:15%"
-               href="{pigcms::U('Beizhi/add',array('token'=>$res['token'],'classid'=>$res['classid']))}"></a>
-
-            <a class="ui-btn-right_home"
-               style="background: url('__STATIC__/home/defaults/img/download_popup.png') no-repeat center center;background-size:24px auto;left:15%"
-               href="{pigcms::U('Beizhi/download',array('token'=>$res['token'],'classid'=>$res['classid']))}"></a>
+               href="{:url('column/add',array('name'=>$info['name']))}"></a>
         </div>
 
         <a class="ui-btn-right_home" style="background: none" id='right_nav_click'></a>
@@ -378,7 +373,7 @@
                  id='pre_click'></div>
         </div>
 
-        <if condition="$res.url neq '' && $template_video neq '' && $_GET[play] eq '1'">
+        {if $_GET[playVideo] eq '1'}
 
             <link href="__STATIC__/home/defaults/projekktor/style.css" rel="stylesheet" type="text/css">
             <script type="text/javascript" src="__STATIC__/home/defaults/projekktor/projekktor-1.2.24r216.min.js"></script>
@@ -396,9 +391,9 @@
                 <a href="{$data.video_url}">{$data.video_url}</a> <br/>(请用在新的浏览器打开下载)
             </div>
 
-        </if>
+        {/if}
 
-        <if condition="$res.url neq '' && $template_video eq '' && ($res[classname] neq '2014科注' || $_GET[play] eq '1')">
+        {if $_GET[playSound] eq '1'}
             <link href="__STATIC__/home/defaults/jplayer/blue.css" rel="stylesheet" type="text/css">
             <script type="text/javascript" src="__STATIC__/home/defaults/jplayer/jquery.jplayer.js"></script>
 
@@ -472,17 +467,14 @@
     <div class="text_down">mp3下载地址：<br/>
         <a href="{$data.sound_url}">{$data.sound_url}</a> <br/>(请用在新的浏览器打开下载)
     </div>
-    <else/>
-    <if condition="$res.url neq '' && $template_video neq '' && $_GET[play] neq '1'">
-        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="#">点击进入视频</a>
+{/if}
+        {if $_GET[playVideo] neq '1'}
+        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playVideo=1">点击进入视频</a>
+        {/if}
+        {if $_GET[playSound] neq '1'}
+        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playSound=1">点击进入mp3</a>
+        {/if}
 
-    </if>
-    <if condition="$res.url neq '' && $template_video eq '' && $_GET[play] neq '1'">
-        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="#">点击进入mp3</a>
-
-    </if>
-
-    </if>
     <div class="text" id="content">
 
             <p>
@@ -621,22 +613,21 @@
 
 
     $('#next_click').on('click',function(){
-    <if condition="$res['next_id'] neq ''">
-        location.href="{pigcms::U('Beizhi/content',array('token'=>$_GET['token'],'id'=>$res['next_id'],'play'=>$_GET['play'],'classid'=>intval($_GET['classid'])))}";
-    <else/>
+        {empty name="next"}
         showTips("没有了", $('#next_click').offset().top+30,2, $('#next_click').offset().left-20);
-    </if>
+        {else}
+        location.href="{$next.url}";
+        {/empty}
 
     });
 
 
     $('#pre_click').on('click',function(){
-    <if condition="$res['pre_id'] neq ''">
-        location.href="{pigcms::U('Beizhi/content',array('token'=>$_GET['token'],'id'=>$res['pre_id'],'play'=>$_GET['play'],'classid'=>intval($_GET['classid'])))}";
-    <else/>
+        {empty name="prev"}
         showTips("没有了", $('#pre_click').offset().top+30,2, $('#pre_click').offset().left);
-    </if>
-
+        {else}
+        location.href="{$prev.url}";
+        {/empty}
     });
 </script>
 </body>
