@@ -81,7 +81,7 @@ class Column extends Common {
                 if (!empty($keyword)) {
                     $where.=" and (title like '%$keyword%' or content like '%$keyword%')";
                     if($name=="kezhu") {
-                        $fantizi = FanJianConvert::simple2tradition($keyword);
+                        $fantizi = FanJianConvert::tradition2simple($keyword);
                         $where = str_replace($keyword, $fantizi, $where);
                         $this->assign('fantizi', $fantizi);
                     }

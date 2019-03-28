@@ -97,8 +97,8 @@
         window.onload = function ()
         {
 
-            if (document.cookie.match(/scrollTop{$_GET['id']}=([^;]+)(;|$)/) != null) {
-                var arr = document.cookie.match(/scrollTop{$_GET['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+            if (document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/) != null) {
+                var arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
                 document.body.scrollTop = parseInt(arr[1]);
             }
 
