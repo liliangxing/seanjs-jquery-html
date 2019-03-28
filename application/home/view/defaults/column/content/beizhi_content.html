@@ -497,7 +497,7 @@
 
     <div id="olload">
 
-        <a href="#"><span>往期回顾</span></a>
+        <a href="{:url('column/index', ['name' => $info.name])}"><span>往期回顾</span></a>
 
     </div>
 
@@ -527,7 +527,7 @@
 
         </ul>
 
-        <a class="more" href="#">更多精彩内容</a>
+        <a class="more" href="{:url('column/index', ['name' => $info.name])}">更多精彩内容</a>
 
 
     </div>
@@ -581,7 +581,7 @@
         return absolute_regex.test(src) ? src : ((src.charAt(0) == "/" ? root_domain : root_page) + src);
     }
     $(".ui-btn-left_pre").click(function(){
-        var   backUrl="#";
+        var   backUrl="{:url('column/index', ['name' => $info.name])}";
 
         if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){ // IE
             if(history.length > 0){
