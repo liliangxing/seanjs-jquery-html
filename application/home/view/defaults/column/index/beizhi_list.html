@@ -21,12 +21,12 @@
                         <div id="pl-home-blogger" style="display: block;">
                             <div class="bl-home-pic"></div>
                         </div>
-                        <form method="get" action="{:url('column/index', ['name' => $info.name])}" id="search">
+                        <form method="get" action="" id="search">
                             <input name="condition" type="hidden">
                         <div id="pl-home-blogsort" style="display: block;">
                             <a data-role="sort-btn" class="blog-all b-txt2" href="javascript:;" trace-code="19_01_26" style="">
                                     <span data-role="sort-title"  class="click"
-                                          onclick="location.href='{:url('column/index', ['name' => $info.name])}'">
+                                          onclick="location.href='{pigcms::U('Beizhi/download',array('classid'=>$_GET[classid],'token'=>$_GET['token']))}'">
                                         {$info.title}</span>
 
 
