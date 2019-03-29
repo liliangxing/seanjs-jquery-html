@@ -78,6 +78,16 @@ class Column extends Common {
                 $conditionParam = [];
                 $param = paramdecode($condition);
                 $keyword=$param['searchText'];
+
+                //捕获不到$condition,使用$_GET[]方法
+                if(empty($condition)) {
+                    $condition=$_GET['condition'];
+                    $param2 = paramdecode($_GET['condition']);
+                    $keyword2 = $param2['searchText'];
+                    if (empty($keyword)) {
+                        $keyword = $keyword2;
+                    }
+                }
                 if (!empty($keyword)) {
                     $where.=" and (title like '%$keyword%' or content like '%$keyword%')";
                     if($name=="kezhu") {
@@ -158,7 +168,7 @@ class Column extends Common {
                 $pageNum = input('param.page');
                 $page = [$columnInfo['list_row'], false, [
                         'page' => $pageNum? : 1,
-                        'path' => empty($condition) ? $name . '-[PAGE].html' : $name . '-' . $condition . '-[PAGE].html'
+                        'path' => empty($condition) ? $name . '-[PAGE].html' : $name . '-[PAGE].html?condition=' . $condition . ''
                 ]];
                 if ('' != $columnInfo['listorder']) {
                     if (strpos($columnInfo['listorder'], 'id ') === false) {
