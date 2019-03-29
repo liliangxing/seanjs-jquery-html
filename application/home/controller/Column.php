@@ -82,7 +82,7 @@ class Column extends Common {
                 //捕获不到$condition,使用$_GET[]方法
                 if(empty($condition)) {
                     $condition=$_GET['condition'];
-                    $param2 = paramdecode($_GET['condition']);
+                    $param2 = paramdecode($condition);
                     $keyword2 = $param2['searchText'];
                     if (empty($keyword)) {
                         $keyword = $keyword2;
