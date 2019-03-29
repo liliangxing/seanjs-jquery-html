@@ -168,7 +168,7 @@ class Column extends Common {
                 $pageNum = input('param.page');
                 $page = [$columnInfo['list_row'], false, [
                         'page' => $pageNum? : 1,
-                        'path' => empty($condition) ? $name . '-[PAGE].html' : $name . '-[PAGE].html?condition=' . $condition . ''
+                        'path' => empty($condition) ? $name . '-[PAGE].html' : $name . '-[PAGE].html?condition=' . urlencode($condition) . ''
                 ]];
                 if ('' != $columnInfo['listorder']) {
                     if (strpos($columnInfo['listorder'], 'id ') === false) {
