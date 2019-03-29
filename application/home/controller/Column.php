@@ -78,6 +78,15 @@ class Column extends Common {
                 $conditionParam = [];
                 $param = paramdecode($condition);
                 $keyword=$param['searchText'];
+
+                //捕获不到$condition,使用$_GET[]方法
+                if(empty($condition)) {
+                    $param2 = paramdecode($_GET['condition']);
+                    $keyword2 = $param2['searchText'];
+                    if (empty($keyword)) {
+                        $keyword = $keyword2;
+                    }
+                }
                 if (!empty($keyword)) {
                     $where.=" and (title like '%$keyword%' or content like '%$keyword%')";
                     if($name=="kezhu") {
