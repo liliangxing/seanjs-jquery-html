@@ -12,3 +12,5 @@ g4  A记录      203.195.163.142
 www  A记录       103.21.140.161
 @  MX记录  10      mail.time24.cn.
 @  TXT记录      v=spf1 a mx ~all
+
+

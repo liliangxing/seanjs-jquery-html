@@ -234,10 +234,16 @@ class Column extends Common {
         if (!empty($prevInfo)) {
             $this->assign('prev', ['title' => $prevInfo['title'], 'url' => $prevInfo['url']]);
         }
-        //面包屑导航
+        $list = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and ( id>('$data[id]' - 5) and id<('$data[id]' + 5))", "id,cname,title", "", 'id desc', "", [10, false, []]);
+
+        $clist = model('Column')->where('model_id',$columnInfo['model_id'])->order('id')->column('id,title,type,name');
+
+
         $this->assign([
             'info' => $columnInfo,
             'data' => $data,
+            'list' => $list->toArray(),
+            'clist' => $clist,
             'crumbs' => $Column->getBreadcrumb($columnInfo['path'] . $columnInfo['id']),
             'rootName' => $this->getColumnName($columnInfo['path'] . $columnInfo['id']),
             'parentName' => $columnInfo['name'],

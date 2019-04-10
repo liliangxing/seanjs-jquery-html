@@ -39,6 +39,21 @@
         #search_box span a{ text-decoration: underline; padding:1px 12px 1px 0;}
         #search_btn { background: #0f79be; margin-top: 6px; border-radius: 2px; border: 0px; width: 100px; line-height: 24px; color: white; }
         #searchstr { font-size: 14px; height: 20px; }
+        #news .more_col {
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            background: none repeat scroll 0 0 #ffffff;
+            border: 1px solid #DDDDDD;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            display: block;
+        }
     </style>
     <style type="text/css">
         #goTop{position:fixed;display:none;width:50px;height:48px;background:rgba(255,255,255,0.4) url('__STATIC__/home/defaults/gotop.png') no-repeat 0px 0px;border:solid 1px #f9f9f8;border-radius:6px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.2);cursor:pointer;z-index:99999;}
@@ -331,13 +346,10 @@
 <div id="win">
 
     <ul class="dropdown">
-
-
-
-            <li><a href="#"><span>栏目</span></a>
+        {volist name="clist" id="vo"}
+            <li><a href="{:url('column/index',['name'=>$vo.name])}"><span>{$vo.title}</span></a>
             </li>
-
-
+        {/volist}
         <div class="clr"></div>
 
     </ul>
@@ -483,6 +495,15 @@
         </p>
         <p>&nbsp;</p>
 
+        <p>
+            <span style="font-size: 14px;">欢迎关注悲智佛网微信公众号，长按图片，识别二维码</span><br/>
+        <div align="center">
+            <img style="width: 80%" src="__STATIC__/home/defaults/img/qrcode.jpg"></div>
+        <span style="font-size: 14px;">
+                公众号名称：beizhifw &nbsp; 公众号ID：beizhifw &nbsp;<br/>
+                关注提示：可在微信上搜索 beizhifw ，在搜索内容中点击关注
+                </span>
+        </p>
 
     </div>
 
@@ -502,26 +523,15 @@
     <div id="oldlist">
 
         <ul>
-
-
-
                 <li class="newsmore">
-
-                    <!--在整合列表页和分类也的时候，这里修改过模板-->
-
-                    <a href="#">
-
+                    {volist name="list.data" id="vo"}
+                    <a href="{$vo.url}">
                         <div class="olditem">
-
-                            <div class="title">文章</div>
-
+                            <div class="title">{$vo.title}</div>
                         </div>
-
                     </a>
-
+                    {/volist}
                 </li>
-
-
         </ul>
 
         <a class="more" href="{:url('column/index', ['name' => $info.name])}">更多精彩内容</a>
@@ -531,9 +541,9 @@
 
 </div>
 
-
-    <a class="more_col" href="#"><span>栏目</span></a>
-
+    {uk:select table="column"  field="title,url" where="model_id='2'"}
+    <a class="more_col" href="{$vo.url}"><span>{$vo.title}</span></a>
+    {/uk:select}
 
 <a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
 
