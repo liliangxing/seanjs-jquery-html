@@ -471,10 +471,13 @@
     </div>
 {/if}
         {if $_GET[playVideo] neq '1'}
-        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playVideo=1">点击进入视频</a>
+        <a class="more" href="?playVideo=1">点击进入视频</a>
         {/if}
         {if $_GET[playSound] neq '1'}
-        <a class="more"  onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))"  href="?playSound=1">点击进入mp3</a>
+        <a class="more" href="?playSound=1">点击进入mp3</a>
+        {/if}
+        {if $_GET[playVideo] eq '1' || $_GET[playSound] eq '1' }
+        <a class="more"  href="?playSound=0">返回文字版</a>
         {/if}
 
     <div class="text" id="content">
