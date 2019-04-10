@@ -406,7 +406,7 @@
                         ready: function (event) {
                             $(this).jPlayer("setMedia", {
                                 mp3:"{$data.sound_url}" //mp3的播放地址
-                            }).jPlayer("play");
+                            })/*.jPlayer("play")*/;
                         },
                         timeupdate: function(event) {
                             if(event.jPlayer.status.currentTime==0){
