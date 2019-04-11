@@ -521,7 +521,7 @@
         <ul>
                 <li class="newsmore">
                     {volist name="list.data" id="vo"}
-                    <a href="{$vo.url}">
+                    <a href="{$vo.url}?playVideo={$_GET[playVideo]}&playSound={$_GET[playSound]}">
                         <div class="olditem">
                             <div class="title">{$vo.title}</div>
                         </div>
@@ -617,7 +617,7 @@
         {empty name="next"}
         showTips("没有了", $('#next_click').offset().top+30,2, $('#next_click').offset().left-20);
         {else}
-        location.href="{$next.url}";
+        location.href="{$next.url}?playVideo={$_GET[playVideo]}&playSound={$_GET[playSound]}";
         {/empty}
 
     });
@@ -627,7 +627,7 @@
         {empty name="prev"}
         showTips("没有了", $('#pre_click').offset().top+30,2, $('#pre_click').offset().left);
         {else}
-        location.href="{$prev.url}";
+        location.href="{$prev.url}?playVideo={$_GET[playVideo]}&playSound={$_GET[playSound]}";
         {/empty}
     });
 </script>
