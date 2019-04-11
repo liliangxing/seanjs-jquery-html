@@ -406,7 +406,7 @@
                         ready: function (event) {
                             $(this).jPlayer("setMedia", {
                                 mp3:"{$data.sound_url}" //mp3的播放地址
-                            })/*.jPlayer("play")*/;
+                            }).jPlayer("play");
                         },
                         timeupdate: function(event) {
                             if(event.jPlayer.status.currentTime==0){
@@ -471,7 +471,7 @@
     </div>
 {/if}
         {if $_GET[playVideo] neq '1'}
-        <a class="more" href="?playVideo=1">点击进入视频</a>
+        <a class="more" onclick="return(confirm('您可以在开启wifi的环境下，打开收听'))" href="?playVideo=1">点击进入视频</a>
         {/if}
         {if $_GET[playSound] neq '1'}
         <a class="more" href="?playSound=1">点击进入mp3</a>
