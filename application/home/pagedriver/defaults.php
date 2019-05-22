@@ -11,15 +11,33 @@ class defaults extends Paginator
 {
 
     /**
+     * 第一页按钮
+     * @param string $text
+     * @return string
+     */
+    protected function getFirstButton($text = "<<")
+    {
+
+        if ($this->currentPage() <= 1) {
+            return null;
+        }
+
+        $url = $this->url(1
+        );
+
+        return $this->getPageLinkWrapper($url, $text);
+    }
+
+    /**
      * 上一页按钮
      * @param string $text
      * @return string
      */
-    protected function getPreviousButton($text = "&laquo;")
+    protected function getPreviousButton($text = "<")
     {
 
         if ($this->currentPage() <= 1) {
-            return $this->getDisabledTextWrapper($text);
+            return null;
         }
 
         $url = $this->url(
@@ -34,13 +52,29 @@ class defaults extends Paginator
      * @param string $text
      * @return string
      */
-    protected function getNextButton($text = '&raquo;')
+    protected function getNextButton($text = '>')
     {
         if (!$this->hasMore) {
-            return $this->getDisabledTextWrapper($text);
+            return null;
         }
 
         $url = $this->url($this->currentPage() + 1);
+
+        return $this->getPageLinkWrapper($url, $text);
+    }
+
+    /**
+     * 末页按钮
+     * @param string $text
+     * @return string
+     */
+    protected function getLastButton($text = '>>')
+    {
+        if (!$this->hasMore) {
+            return null;
+        }
+
+        $url = $this->url($this->lastPage());
 
         return $this->getPageLinkWrapper($url, $text);
     }
@@ -79,19 +113,27 @@ class defaults extends Paginator
 
         $html = '';
 
-        if (is_array($block['first'])) {
+        /*if (is_array($block['first'])) {
             $html .= $this->getUrlLinks($block['first']);
         }
 
         if (is_array($block['slider'])) {
             $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['slider']);
-        }
+        }*/
 
-        if (is_array($block['last'])) {
+        $html .="<select onchange='loadPage(this.value);' id='z'>";
+        for ($page = 1; $page <= $this->lastPage; $page++) {
+            $html .= sprintf(
+                '<option value="%s" %s>%s</div>',
+                $this->url($page),($this->currentPage== $page?"selected":""),$page);
+        }
+        $html .= sprintf("</select> <a class='tiaozhuan' href='javaScript:gotoPage();'>GO</a>");
+
+       /* if (is_array($block['last'])) {
             $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['last']);
-        }
+        }*/
 
         return $html;
     }
@@ -111,10 +153,12 @@ class defaults extends Paginator
                 );
             } else {
                 return sprintf(
-                   '<div class="ui icon buttons blue">%s %s %s</div>',
+                   '<div class="ui icon buttons blue">%s %s %s %s %s</div>',
+                    $this->getFirstButton(),
                     $this->getPreviousButton(),
                     $this->getLinks(),
-                    $this->getNextButton()
+                    $this->getNextButton(),
+                    $this->getLastButton()
                 );
             }
         }

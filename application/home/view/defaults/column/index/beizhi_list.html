@@ -108,18 +108,24 @@
     .pages .current, .pages a{padding:0 12px;}
 </style>
 <script>
-    $('#z').blur(function(){
+    function loadPage(value){
         var url=$('.tiaozhuan').attr("href");
-        var newurl=url.replace('[PAGE]', this.value);
+        var newurl=url.replace('9999', value);
         $('.tiaozhuan').attr("href",newurl);
-    });
+        location.href=newurl;
+    };
+
+    function gotoPage(){
+        var url=$('#z').val();
+        location.href=url;
+    };
 
 
     $(window).scroll(function () {
         var sc = $(window).scrollTop();
         var rwidth = $(window).width() + $(document).scrollLeft();
         var rheight = $(window).height() + $(document).scrollTop();
-        if (sc > $(window).height() / 2) {
+        if (sc > $(window).height() / 2 || sc>100) {
             $(".showPages").css("display", "block");
         } else {
 
