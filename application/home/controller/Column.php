@@ -234,7 +234,7 @@ class Column extends Common {
         if (!empty($prevInfo)) {
             $this->assign('prev', ['title' => $prevInfo['title'], 'url' => $prevInfo['url']]);
         }
-        $list = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and ( id>('$data[id]' - 5) and id<('$data[id]' + 5))", "id,cname,title", "", 'id desc', "", [10, false, []]);
+        $list = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and ( id>('$data[id]' - 3) and id<('$data[id]' + 3))", "id,cname,title", "", 'id desc', "", [10, false, []]);
 
         $clist = model('Column')->where('model_id',$columnInfo['model_id'])->order('id')->column('id,title,type,name');
 
