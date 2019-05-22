@@ -13,4 +13,9 @@ www  A记录       103.21.140.161
 @  MX记录  10      mail.time24.cn.
 @  TXT记录      v=spf1 a mx ~all
 
+## 后台登录
+http://localhost:8890/admin.php
+```
+账号：admin  密码：123456
+
 
