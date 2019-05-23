@@ -122,7 +122,9 @@ class defaults extends Paginator
             $html .= $this->getUrlLinks($block['slider']);
         }*/
 
-        $html .="<select onchange='loadPage(this.value);' id='z'>";
+        $html .="<select style=\"
+    width: 3rem;
+\" onchange='loadPage(this.value);' id='z'>";
         for ($page = 1; $page <= $this->lastPage; $page++) {
             $html .= sprintf(
                 '<option value="%s" %s>%s</div>',
