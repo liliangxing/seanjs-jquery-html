@@ -2435,6 +2435,9 @@ margin-left:-110px;
 	cursor: pointer;
 	border-top:1px solid #E0E0E0;
 }
+#news .newsmore a{
+	display:block;
+}
 #news .olditem {
 	display: block;
 	padding: 10px 0 9px 0;
