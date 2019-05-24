@@ -507,37 +507,28 @@
 
 
 <div class="list">
-
     <div id="olload">
-
         <a href="{:url('column/index', ['name' => $info.name])}"><span>往期回顾</span></a>
-
     </div>
 
 
     <div id="oldlist">
-
         <ul>
+            {volist name="list.data" id="vo"}
                 <li class="newsmore">
-                    {volist name="list.data" id="vo"}
-                    <a href="{$vo.url}?playVideo={$_GET[playVideo]}&playSound={$_GET[playSound]}">
                         <div class="olditem">
-                            <div class="title">{$vo.title}</div>
+                            <div class="title"><a href="{$vo.url}?playVideo={$_GET[playVideo]}&playSound={$_GET[playSound]}">{$vo.title}</a></div>
                         </div>
-                    </a>
-                    {/volist}
                 </li>
+            {/volist}
         </ul>
-
         <a class="more" href="{:url('column/index', ['name' => $info.name])}">更多精彩内容</a>
-
-
     </div>
 
 </div>
 
-    {uk:select table="column"  field="title,url" where="model_id='2'"}
-    <a class="more_col" href="{$vo.url}"><span>{$vo.title}</span></a>
+    {uk:select table="column"  field="title,name" where="model_id='2'"}
+    <a class="more_col" href="{:url('column/index',['name'=>$vo.name])}"><span>{$vo.title}</span></a>
     {/uk:select}
 
 <a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
