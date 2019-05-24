@@ -336,8 +336,8 @@ div#content p {
 	font-size:14px;
 }
 div#content p a {
-	 color: #E40000;
-    text-decoration: none;
+	 color: #535aad;
+    text-decoration: underline;
 }
 div#content p a:hover {
     text-decoration: none;
