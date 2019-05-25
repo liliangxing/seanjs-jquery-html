@@ -234,9 +234,9 @@ class Column extends Common {
         if (!empty($prevInfo)) {
             $this->assign('prev', ['title' => $prevInfo['title'], 'url' => $prevInfo['url']]);
         }
-        $list1 = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and  id>='$data[id]'", "id,cname,title", "", 'id desc', "", [3, false, []]);
+        $list1 = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and  id>='$data[id]'", "id,cname,title", "", 'id asc', "", [3, false, []]);
         $list2 = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and  id<'$data[id]'", "id,cname,title", "", 'id desc', "", [2, false, []]);
-        $list = array_merge($list1->all(), $list2->all());
+        $list = array_merge($list1->getCollection()->order("id","desc")->toArray(), $list2->all());
         $clist = model('Column')->where('model_id',$columnInfo['model_id'])->order('id')->column('id,title,type,name');
 
 
