@@ -236,7 +236,7 @@ class Column extends Common {
         }
         $list1 = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and  id>='$data[id]'", "id,cname,title", "", 'id asc', "", [3, false, []]);
         $list2 = model('ModelField')->getDataList($modelTable, "status='1' and cname='$name' and  id<'$data[id]'", "id,cname,title", "", 'id desc', "", [2, false, []]);
-        $list = array_merge($list1->getCollection()->order("id","desc")->toArray(), $list2->all());
+        $list = array_merge($list1->getCollection()->order("id","desc")->toArray(), $list2->items());
         $clist = model('Column')->where('model_id',$columnInfo['model_id'])->order('id')->column('id,title,type,name');
 
 
