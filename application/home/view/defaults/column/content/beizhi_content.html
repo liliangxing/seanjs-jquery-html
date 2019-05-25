@@ -475,7 +475,7 @@
         {if $_GET[playSound] neq '1' && $data.sound_url neq ''}
         <a class="more" href="?playSound=1">点击进入mp3</a>
         {/if}
-        {if ($_GET[playVideo] eq '1' || $_GET[playSound] eq '1') && ($data.sound_url neq '' || $data.video_url neq '')}
+        {if ($_GET[playVideo] eq '1' && $data.video_url neq '')|| $_GET[playSound] eq '1' && $data.sound_url neq '') }
         <a class="more"  href="?playSound=0">返回文字版</a>
         {/if}
 
