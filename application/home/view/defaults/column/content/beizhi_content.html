@@ -324,9 +324,9 @@
             <div class="clr" style="height: 5px;"></div>
             <span id="post-date">{:date('Y-m-d H:i:s',0)}</span>
             <span class="header_font">字体大小：
-                <span id="big_click" style="text-decoration: underline;">大</span>
-                <span id="middle_click" >中</span>
-                <span id="small_click" style="text-decoration: underline;">小</span>
+                <span class="font_size_click" data-id="1.4" style="text-decoration: underline;">大</span>
+                <span class="font_size_click" data-id="1.2">中</span>
+                <span class="font_size_click" data-id="1.0" style="text-decoration: underline;">小</span>
             </span>
             <div style="background: url('__STATIC__/home/defaults/img/next.png') no-repeat ;background-size:30px auto;position:absolute; right:2px;bottom:0px; width:30px; height:30px; z-index:10 "
                  id='next_click'></div>
@@ -581,21 +581,11 @@
         {/empty}
     });
 
-    $('#big_click').on('click',function(){
-        $("#content p").css("font-size","1.4em");
-        $("#big_click").siblings().css("text-decoration","underline");
+    $('.font_size_click').on('click',function(){
+        $("#content p").css("font-size", $(this).attr("data-id")+"em");
+        $(this).siblings().css("text-decoration","underline");
         $(this).css("text-decoration","");
      });
-    $('#small_click').on('click',function(){
-        $("#content p").css("font-size","1.0em");
-        $("#small_click").siblings().css("text-decoration","underline");
-        $(this).css("text-decoration","");
-    });
-    $('#middle_click').on('click',function(){
-        $("#content p").css("font-size","1.2em");
-        $("#middle_click").siblings().css("text-decoration","underline");
-        $(this).css("text-decoration","");
-    });
 </script>
 </body>
 
