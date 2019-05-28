@@ -494,6 +494,12 @@
 <a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
 
 <script>
+    var font_size_setting="font_size"+self.location.hostname.toString().replace(/\./g,"");
+    var font_size=getCookie(font_size_setting);
+    setTimeout( function () {
+        $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");},200
+    );
+
     $("#content img").click(function(){
         var imgArray = [];
         var curImageSrc = canonical_uri($(this).attr('src'),"{C('site_url')}/");
@@ -582,9 +588,19 @@
     });
 
     $('.font_size_click').on('click',function(){
-        $("#content p").css("font-size", $(this).attr("data-id")+"em");
+        var data_id = $(this).attr("data-id");
+        $("#content p").css("font-size", data_id+"em");
         $(this).siblings().css("text-decoration","underline");
         $(this).css("text-decoration","");
+        var i;
+        if(data_id=="1.4"){
+            i="0";
+        }else  if(data_id=="1.2"){
+            i="1";
+        }else {
+            i="2";
+        }
+        setCookie(font_size_setting,i,7);
      });
 </script>
 </body>
