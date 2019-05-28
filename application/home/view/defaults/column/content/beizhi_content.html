@@ -497,7 +497,7 @@
     var font_size_setting="font_size"+self.location.hostname.toString().replace(/\./g,"");
     var font_size=getCookie(font_size_setting);
     setTimeout( function () {
-        $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");},200
+        $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");},50
     );
 
     $("#content img").click(function(){
