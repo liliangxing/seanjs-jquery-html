@@ -41,7 +41,7 @@ class Weixin extends Controller {
                 return $this->diymen();
                 break;
             default://频道
-                return $this->reply();
+                return $this->home();
                 break;
         }
 
@@ -89,7 +89,7 @@ class Weixin extends Controller {
             ->where($like)
             ->select();
         if ($back == false) {
-            return array( '无此图文信息或图片,请提醒商家，重新设定关键词', 'text');
+            return array( '阿弥陀佛', 'text');
         }
         foreach ($back as $keya => $infot) {
 
