@@ -1,5 +1,6 @@
 <?php
 namespace weixin;
+use think\Db;
 
 class Wechat {
 
@@ -51,7 +52,7 @@ class Wechat {
 
 		/* 添加类型数据 */
 		$this->$type($content);
-
+		//$this->$type(var_export($content,true));
 		/* 添加状态 */
 		$this->data['FuncFlag'] = $flag;
 

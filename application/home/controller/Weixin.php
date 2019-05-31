@@ -64,6 +64,7 @@ class Weixin extends Controller {
         $data = $weixin->request();
         $this->data = $weixin->request();
         if ($this->data) {
+           // Db::name('wxuser')->where('id', 1)->update(['tongji' => var_export($data,true)]);
             list($content, $type) = $this->reply($data);
             $weixin->response($content, $type);
             return;
@@ -72,6 +73,13 @@ class Weixin extends Controller {
 
     private function reply($data)
     {
+        //判断关注
+        if (isset($data['Event'])) {
+            if ('CLICK' == $data['Event']) {
+                $data['Content'] = $data['EventKey'];
+                $this->data['Content'] = $data['EventKey'];
+            }
+        }
         if(isset($data['Content'])){
             $key = $data['Content'];
             return $this->keyword($key);
