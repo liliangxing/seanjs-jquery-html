@@ -54,11 +54,6 @@
         window.onload = function ()
         {
 
-            if (document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/) != null) {
-                var arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
-                document.body.scrollTop = parseInt(arr[1]);
-            }
-
             var oWin = document.getElementById("win");
 
             var oLay = document.getElementById("overlay");
@@ -497,7 +492,12 @@
     var font_size_setting="font_size"+self.location.hostname.toString().replace(/\./g,"");
     var font_size=getCookie(font_size_setting);
     setTimeout( function () {
-        $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");},50
+        $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");
+            if (document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/) != null) {
+                var arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+                document.body.scrollTop = parseInt(arr[1]);
+            }
+        },50
     );
 
     $("#content img").click(function(){
