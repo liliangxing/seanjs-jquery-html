@@ -31,8 +31,8 @@
                 {
                     scrollFlag=true;
                 }
-                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>10*$(window).height() &&
-                    scrollHeightCount<3)
+                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>5*$(window).height() &&
+                    scrollHeightCount<4)
                 {
                     scrollHeightCount++;
                     $("#goTop").css("display", "block");
