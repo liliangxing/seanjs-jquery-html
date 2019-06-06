@@ -17,8 +17,6 @@
     <script>
         var scrollFlag=true;
         var canScrollFlag=false;
-        var scrollHeight=0;
-        var scrollHeightCount=1;
         $(window).scroll(function(){
             var sc=$(window).scrollTop();
             var rwidth=$(window).width()+$(document).scrollLeft();
@@ -31,17 +29,11 @@
                 {
                     scrollFlag=true;
                 }
-                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>3*$(window).height() &&
-                    sc>$(window).height()*12)
+                if($("#goTop").is(":hidden"))
                 {
-                    scrollHeightCount++;
                     $("#goTop").css("display", "block");
                     $("#goTop").css("right", (6) + "px");
                     $("#goTop").css("bottom", (6) + "px");
-                    scrollHeight=sc;
-                    setTimeout(function () {
-                        $("#goTop").css("display", "none");
-                    }, 5000);
                 }
             }else{
                 $("#goTop").css("display","none");
