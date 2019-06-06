@@ -34,14 +34,14 @@
                 if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>6*$(window).height() &&
                     scrollHeightCount<3)
                 {
+                    scrollHeightCount++;
                     $("#goTop").css("display", "block");
                     $("#goTop").css("right", (6) + "px");
                     $("#goTop").css("bottom", (6) + "px");
                     scrollHeight=sc;
                     setTimeout(function () {
                         $("#goTop").css("display", "none");
-                    }, 5000*scrollHeightCount);
-                    scrollHeightCount++;
+                    }, 5000*(scrollHeightCount-1));
                 }
             }else{
                 $("#goTop").css("display","none");
