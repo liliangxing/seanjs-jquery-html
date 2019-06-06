@@ -17,6 +17,8 @@
     <script>
         var scrollFlag=true;
         var canScrollFlag=false;
+        var scrollHeight=0;
+        var scrollHeightCount=1;
         $(window).scroll(function(){
             var sc=$(window).scrollTop();
             var rwidth=$(window).width()+$(document).scrollLeft();
@@ -24,15 +26,24 @@
             if(scrollFlag){
                 document.cookie = "scrollTop{$data['id']}=" + sc;
             }
-            if(sc>$(window).height()/2){
-                $("#goTop").css("display","block");
-                $("#goTop").css("right",(6)+"px");
-                $("#goTop").css("bottom",(6)+"px");
+            if(sc>$(window).height()*6){
+
 
 
                 if(!scrollFlag && canScrollFlag)
                 {
                     scrollFlag=true;
+                }
+                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>scrollHeightCount*2*$(window).height())
+                {
+                    scrollHeightCount++;
+                    $("#goTop").css("display", "block");
+                    $("#goTop").css("right", (6) + "px");
+                    $("#goTop").css("bottom", (6) + "px");
+                    scrollHeight=sc;
+                    setTimeout(function () {
+                        $("#goTop").css("display", "none");
+                    }, 5000);
                 }
             }else{
                 $("#goTop").css("display","none");
