@@ -26,12 +26,12 @@
             if(scrollFlag){
                 document.cookie = "scrollTop{$data['id']}=" + sc;
             }
-            if(sc>$(window).height()*6){
+            if(sc>$(window).height()*10){
                 if(!scrollFlag && canScrollFlag)
                 {
                     scrollFlag=true;
                 }
-                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>2*$(window).height() &&
+                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>3*$(window).height() &&
                     sc>$(window).height()*12)
                 {
                     scrollHeightCount++;
@@ -41,7 +41,7 @@
                     scrollHeight=sc;
                     setTimeout(function () {
                         $("#goTop").css("display", "none");
-                    }, 6000);
+                    }, 5000);
                 }
             }else{
                 $("#goTop").css("display","none");
