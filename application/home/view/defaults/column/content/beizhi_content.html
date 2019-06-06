@@ -31,8 +31,8 @@
                 {
                     scrollFlag=true;
                 }
-                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>5*$(window).height() &&
-                    scrollHeightCount<4)
+                if($("#goTop").is(":hidden")&& Math.abs(sc-scrollHeight)>2*$(window).height() &&
+                    sc>$(window).height()*12)
                 {
                     scrollHeightCount++;
                     $("#goTop").css("display", "block");
@@ -41,7 +41,7 @@
                     scrollHeight=sc;
                     setTimeout(function () {
                         $("#goTop").css("display", "none");
-                    }, 6000-(scrollHeightCount-1)*1000);
+                    }, 6000);
                 }
             }else{
                 $("#goTop").css("display","none");
