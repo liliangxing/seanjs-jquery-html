@@ -1,4 +1,8 @@
 @charset "utf-8";
+#news{background-color:#F0EFEF;margin: 0 auto;
+    max-width: 640px;
+    min-width: 320px;
+    overflow-x: hidden;}
 .b-load-box, .b-loading .b-ft-icon, .b-loading i, .b-redtips-a, img, input {
     vertical-align: middle
 }
