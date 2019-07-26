@@ -24,7 +24,7 @@
             if(scrollFlag){
                 document.cookie = "scrollTop{$data['id']}=" + sc;
             }
-            if(sc>$(window).height()*13){
+            if(sc>$(window).height()*10){
                 if(!scrollFlag && canScrollFlag)
                 {
                     scrollFlag=true;
