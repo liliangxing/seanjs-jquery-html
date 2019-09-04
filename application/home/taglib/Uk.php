@@ -64,9 +64,10 @@ class Uk extends Taglib {
         //可传变量
         $cid = $this->replaceVar($cid);
         $where = $this->replaceVar($where);
+        $time = time()+ 24*3600*7;
         switch ($nowtime) {
             case 'less':
-                $where.=empty($where) ? "create_time <" . time() : " and create_time <" . time();
+                $where.=empty($where) ? "create_time <" . time() : " and create_time <" . $time;
                 break;
             case 'more':
                 $where.=empty($where) ? "create_time >" . time() : " and create_time >" . time();
