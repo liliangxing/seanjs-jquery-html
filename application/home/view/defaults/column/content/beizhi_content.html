@@ -195,16 +195,8 @@
                         if (_left > $(document).width() - _tipWidth) {
                             _left = _left - _tipWidth;
                         }
-                        var _tWidth = $(document).width() - Math.abs(_left);
-                        if(_left>0){
-                            if(_tWidth>_tipWidth){ _tWidth=_tipWidth;}
-                        }else{
-                            _tWidth = _tipWidth;
-                        }
-
                         $("#tip").html(_tip).show();
                         $("#tip").offset({ top: _top, left: _left });
-                        $("#tip").css("width",_tWidth);
                         $("#search_btn").val("下一个 "+(i+1)+"/"+$(".highlight").length+"");
                         $("#search_btn").css("position","fixed");
                         $("#search_btn").css("top","0.3rem");
@@ -219,6 +211,10 @@
                         $('#tip').show();
                         $("#tip").html(_tip).offset({ top: _top, left: _left });
                     }
+                    var _tWidth = $(window).width() - $(".highlight").eq(i).offset().left-4;
+                    /* 虽然有漏洞，但是效果过得去*/
+                    if(_tWidth> $("#tip").width()){ _tWidth= $("#tip").width();}
+                    $("#tip").css("width",_tWidth);
                     $("html, body").animate({ scrollTop: _top - 92 });
                     i++;
                     if (i > $(".highlight").length - 1) {
