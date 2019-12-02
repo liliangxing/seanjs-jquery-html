@@ -197,11 +197,11 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
-        if($_GET[act]=='edit'){
+        /*if($_GET[act]=='edit'){
             return $this->edit($name,$id);
         }else if($_GET[act]=='add'){
             return $this->add($name);
-        }
+        }*/
         $result = $this->validate(['columnName' => $name, 'id' => $id], ['columnName|栏目标识' => 'require|alpha', 'id|文档ID' => 'require|number']);
         if (true !== $result) {
             abort(404, $result);
