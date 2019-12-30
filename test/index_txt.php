@@ -20,7 +20,7 @@ if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
         <td >
             <?php
             if($page){
-                $counter=file_get_contents("example.txt"); //读取txt文件内容到$counter
+                $counter=file_get_contents("txt/example.txt"); //读取txt文件内容到$counter
                 $counter = iconv("GBK", "UTF-8", $counter);
                 $length=mb_strlen($counter,"UTF-8");
                 $pageLength = 6600;
