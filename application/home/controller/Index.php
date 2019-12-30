@@ -45,10 +45,7 @@ class Index extends Common {
             $where .= " and status='1'";
             $list = model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
             if ($list->isEmpty()) {
-                $fantizi= FanJianConvert::simple2tradition($keyword);
-                $where = str_replace($keyword,$fantizi,$where);
-                $list = model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
-
+                $list = Index::useTraditionWord($list,$keyword,$where,$modelTable,$mid,$cid);
             }
         } else {
             foreach ($modellist as $key => $vo) {
@@ -65,10 +62,8 @@ class Index extends Common {
                 $where .= " and status='1'";
                 $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
                 if ($list->isEmpty()) {
-                    $fantizi= FanJianConvert::simple2tradition($keyword);
-                    $where = str_replace($keyword,$fantizi,$where);
-                    $list = model('ModelField')->getDataList($vo['table'], $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
-                    if ($list->isEmpty()) {
+                    $list =  Index::useTraditionWord($list,$keyword,$where,$vo['table'],$mid,$cid);
+                   if ($list->isEmpty()) {
                         continue;
                     }else {
                          break;
@@ -91,4 +86,10 @@ class Index extends Common {
         return $this->display('index/search');
     }
 
+    private static function useTraditionWord($list,$keyword,$where,$modelTable,$mid,$cid)
+    {
+        $fantizi= FanJianConvert::tradition2simple($keyword);
+        $where = str_replace($keyword,$fantizi,$where);
+        return model('ModelField')->getDataList($modelTable, $where, "*", "", "orders,id desc", "", [15, false, ['query' => ['mid' => $mid, 'cid' => $cid, 'keyword' => $keyword,]]], $cid);
+    }
 }

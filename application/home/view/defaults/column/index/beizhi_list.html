@@ -8,6 +8,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>{$info.title}-{$title}</title>
     <link rel="stylesheet" type="text/css" href="__STATIC__/home/defaults/css/pages.css">
+    <script type="text/javascript" src="__STATIC__/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/home/defaults/beizhi/list.js"></script>
 </head>
 
 <body id="news">
@@ -32,7 +34,7 @@
 
                                 <p class="seach">
                                     <input type="text" id="txtsearch1" placeholder="请输入关键字" value="{$fantizi}" style="color: #d8c182">
-                                    <input type="button" onclick="search1()">
+                                    <input type="button" class="search_btn" onclick="search1()">
                                 </p>
 
                             </a>
@@ -64,7 +66,7 @@
                         </ul>
                         </article>
                     </div>
-                    <div style="height:120px"></div>
+                    <div style="height:10rem;"></div>
 
                     <div class="showPages">
                         <div class="pages">{$page|raw}</div>
@@ -79,19 +81,6 @@
 
 </div>
 </div>
-<script type="text/javascript">
-    function search1() {
-        if (document.getElementById("txtsearch1").value == "") {
-            alert("请输入搜索条件！")
-        }
-        else {
-            $('[name="condition"]').val("searchText="+document.getElementById("txtsearch1").value);
-            $('#search').submit();
-        }
-    }
-
-</script>
-<script type="text/javascript" src="__STATIC__/jquery.min.js"></script>
 
 <style type="text/css">
     .showPages {
@@ -103,38 +92,10 @@
         left:0;
         bottom:0;
     }
-
     .info{padding:0 0 4px 0;display: inline;}
     .info input{border:solid #ccc 1px; width:7%; padding: 3px 2px;display:inline;}
     .tiaozhuan{padding: 0 0 0 5px;}
     .pages .current, .pages a{padding:0 12px;}
 </style>
-<script>
-    function loadPage(value){
-        location.href=value;
-    };
-
-    function gotoPage(){
-        var url=$('#z').val();
-        location.href=url;
-    };
-
-
-    $(window).scroll(function () {
-        var sc = $(window).scrollTop();
-        var rwidth = $(window).width() + $(document).scrollLeft();
-        var rheight = $(window).height() + $(document).scrollTop();
-        if (sc > $(window).height() / 2 || sc>100) {
-            $(".showPages").css("display", "block");
-        } else {
-
-            $(".showPages").css("display", "none");
-
-        }
-    });
-
-
-</script>
-
 </body>
 </html>

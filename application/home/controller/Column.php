@@ -89,12 +89,10 @@ class Column extends Common {
                     }
                 }
                 if (!empty($keyword)) {
-                    $where.=" and (title like '%$keyword%' or content like '%$keyword%')";
-                    if($name=="kezhu") {
+                    $where.=" and (title like '%$keyword%' or locate('$keyword',content)>0 )";
                         $fantizi = FanJianConvert::tradition2simple($keyword);
                         $where = str_replace($keyword, $fantizi, $where);
-                        $this->assign('fantizi', $fantizi);
-                    }
+                        $this->assign('fantizi', $keyword);
                 }
 
                 //处理栏目列表筛选参数
