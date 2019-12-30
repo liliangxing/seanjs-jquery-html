@@ -77,20 +77,6 @@ function Simplized(cc){
     }
     return str;
 }
-
-function setCookie(name, value)		//cookies设置
-{
-    var argv = setCookie.arguments;
-    var argc = setCookie.arguments.length;
-    var expires = (argc > 2) ? argv[2] : null;
-    if(expires!=null)
-    {
-        var LargeExpDate = new Date ();
-        LargeExpDate.setTime(LargeExpDate.getTime() + (expires*1000*3600*24));
-    }
-    document.cookie = name + "=" + escape (value)+((expires == null) ? "" : ("; expires=" +LargeExpDate.toGMTString()));
-}
-
 var StranLink_Obj=document.getElementById("StranLink")
 if (StranLink_Obj)
 {
