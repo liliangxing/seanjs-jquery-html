@@ -1,12 +1,5 @@
 var scrollFlag = true;
 var canScrollFlag = false;
-$("#goTop").click(function () {
-    scrollFlag = false;
-    $('body,html').animate({scrollTop: 0}, 100);
-    setTimeout(function () {
-        canScrollFlag = true;
-    }, 200);
-});
 window.onload = function () {
     var oWin = document.getElementById("win");
     var oLay = document.getElementById("overlay");
@@ -30,6 +23,13 @@ window.onload = function () {
 
 $(function(){
 
+    $("#goTop").click(function () {
+        scrollFlag = false;
+        $('body,html').animate({scrollTop: 0}, 100);
+        setTimeout(function () {
+            canScrollFlag = true;
+        }, 200);
+    });
     $("#content img").click(function(){
         var imgArray = [];
         var curImageSrc = canonical_uri($(this).attr('src'), window.location.host +"/");
@@ -227,4 +227,41 @@ function canonical_uri(src, base_path)
     }
     // make sure to return `src` as absolute
     return absolute_regex.test(src) ? src : ((src.charAt(0) == "/" ? root_domain : root_page) + src);
+}
+
+
+function overrrideUrl(pageIndex) {
+
+    var url = window.location.href;
+    var   newUrl=  changeURLArg(url, "p", pageIndex);
+    window.history.pushState({}, "", newUrl);
+}
+function changeURLArg(url, arg, arg_val) {
+    /// <summary>
+    /// url参数替换值
+    /// </summary>
+    /// <param name="url">目标url </param>
+    /// <param name="arg">需要替换的参数名称</param>
+    ///<param name="arg_val">替换后的参数的值</param>
+    /// <returns>参数替换后的url </returns>
+    var pattern = arg + '=([^&]*)';
+    var replaceText = arg + '=' + arg_val;
+    if (url.match(pattern)) {
+        var tmp = '/(' + arg + '=)([^&]*)/gi';
+        tmp = url.replace(eval(tmp), replaceText);
+        return tmp;
+    } else {
+        if (url.match('[\?]')) {
+            return url + '&' + replaceText;
+        } else {
+            return url + '?' + replaceText;
+        }
+    }
+    return url + '\n' + arg + '\n' + arg_val;
+}
+//获取url中的参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg); //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
 }

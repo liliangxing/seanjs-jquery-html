@@ -9,9 +9,6 @@
     <meta name="format-detection" content="telephone=no" />
     <link href="__STATIC__/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="__STATIC__/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
-    <div style="position:relative;">
-        <div id="goTop" class="goTop"></div>
-    </div>
     <script type="text/javascript" src="__STATIC__/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="__STATIC__/home/defaults/beizhi/content_common.js"></script>
@@ -246,12 +243,18 @@
     <a class="more_col" href="{:url('column/index',['name'=>$vo.name])}"><span>{$vo.title}</span></a>
     {/uk:select}
 
-<a class="footer" href="#news" target="_self"><span class="top">返回顶部</span></a>
+    <div style="position:relative;">
+        <div  id="goTop" class="goTop" >
+            <a id="startHere" href="#/scrollTo" style="display: block; width: 100%; float: left; height:100%;"  ></a>
+        </div>
+    </div>
+<a class="footer" id="backTop" target="_self"><span class="top">返回顶部</span></a>
 <script>
     $(window).scroll(function () {
         var sc = $(window).scrollTop();
         var rwidth = $(window).width() + $(document).scrollLeft();
         var rheight = $(window).height() + $(document).scrollTop();
+        $("#startHere").attr("href","#/scrollTo"+sc);
         if (scrollFlag) {
             document.cookie = "scrollTop{$data['id']}=" + sc;
         }
@@ -271,10 +274,17 @@
     $('#searchstr').val(unescape("{$_GET[searchText]}"));
     setTimeout( function () {
             $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");
+        var url = window.location.href;
+        var arr;
+        if (url.match(/scrollTo([^;]+)(;|$)/) != null) {
+             arr = url.match(/scrollTo([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+        }else{
             if (document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/) != null) {
-                var arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
-                document.body.scrollTop = parseInt(arr[1]);
-            }
+             arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+           }
+        }
+        $('body,html').animate({scrollTop: parseInt(arr[1])}, 100);
+        //document.body.scrollTop = parseInt(arr[1]);
         },50
     );
     $('#next_click').on('click',function(){
