@@ -50,6 +50,7 @@ function loadTxtDataIntoDatabase($articleId,$title,$file,$i,$table,$conn,$fields
     $sqldata = str_replace("'","\'",$sqldata);
     $sqldata = str_replace("\r\n","<br/>",$sqldata);
     $sqldata = str_replace("　　 ","　　",$sqldata);
+    $sqldata = str_replace("　　　","　　",$sqldata);
   $end = ", '".$sqldata."');";
 
 
