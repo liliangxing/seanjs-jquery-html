@@ -180,7 +180,7 @@ class Column extends Common {
                     abort(404, '第' . $page[2]['page'] . '页没有信息~');
                 }
                 $this->assign('param', $param);
-                $this->assign('list', $list->toArray());
+                $this->assign('list', FanJianConvert::addPlaySound($list->toArray()));
                 $this->assign('page', $list->render());
             }
             $this->assign([

@@ -24,4 +24,25 @@ class FanJianConvert{
     }
     return $traditionalCN;
   }
+
+  public static function addPlaySound($list){
+      foreach ($list as $key => $data) {
+          if($key=="data") {
+              $list2= $list[$key];
+              foreach ($list2 as $key2 => $data2) {
+                  if(isset($list2[$key2]['sound_url'])) {
+                      if ("fohao" == $list2[$key2]['cname']) {
+                          if (stripos($list2[$key2]['url'], "?") > 0) {
+                              $list2[$key2]['url'] .= "&playSound=1";
+                          } else {
+                              $list2[$key2]['url'] .= "?playSound=1";
+                          }
+                      }
+                  }
+              }
+              $list[$key] = $list2;
+          }
+      }
+      return $list;
+  }
 }
