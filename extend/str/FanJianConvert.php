@@ -32,7 +32,7 @@ class FanJianConvert{
               foreach ($list2 as $key2 => $data2) {
                   if(isset($list2[$key2]['sound_url'])) {
                       if ("fohao" == $list2[$key2]['cname']) {
-                          self::joinUrl($list2[$key2]['url'],"playSound=1");
+                          $list2[$key2]['url']=self::joinUrl($list2[$key2]['url'],"playSound=1");
                       }
                   }
               }
