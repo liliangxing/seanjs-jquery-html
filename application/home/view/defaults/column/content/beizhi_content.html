@@ -280,7 +280,7 @@
             var regExp = new RegExp(searchText, 'g');
             var newHtml = html.replace(regExp, '<span class="highScroll">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
             $('#content').html(newHtml);//更新；
-            if($(".highScroll")>0) {
+            if($(".highScroll").length>0) {
                 var _top = $(".highScroll").eq(0).offset().top + $(".highScroll").height();
                 $("html, body").animate({scrollTop: _top - 92});
             }
