@@ -245,7 +245,6 @@
 
     <div style="position:relative;">
         <div  id="goTop" class="goTop" >
-            <a id="startHere" href="#/scrollTo" style="display: block; width: 100%; float: left; height:100%;"  ></a>
         </div>
     </div>
 <a class="footer" id="backTop" target="_self"><span class="top">返回顶部</span></a>
@@ -254,7 +253,6 @@
         var sc = $(window).scrollTop();
         var rwidth = $(window).width() + $(document).scrollLeft();
         var rheight = $(window).height() + $(document).scrollTop();
-        $("#startHere").attr("href","#/scrollTo"+sc);
         if (scrollFlag) {
             document.cookie = "scrollTop{$data['id']}=" + sc;
         }
