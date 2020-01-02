@@ -17,9 +17,9 @@ div#content p br{line-height: 2.2;}
 	font-size: 28px;
 	text-align: center;
 }
-.highlight { background: yellow; color: red; }
+.highlight { background: yellow;}
 .prelight { background: blue; color: white; }
-#tip { background: #FFFFCC; border: 1px solid #999; width: 200px; text-align: center; display: none; font-size: 12px; }
+#tip { background: #FFFFCC;  width: 200px; text-align: center; display: none; font-size: 12px; }
 #search_box { text-align:right;height: 30px;  z-index: 4; padding: 0 10px 0 0;}
 #search_box span a{ text-decoration: underline; padding:1px 12px 1px 0;}
 #search_btn { background: #0f79be; margin-top: 6px; border-radius: 2px; border: 0px; width: 100px; line-height: 24px; color: white; }

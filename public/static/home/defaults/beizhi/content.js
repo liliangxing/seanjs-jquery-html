@@ -64,33 +64,21 @@ $(function(){
     });
     $('#search_btn').click(highlight);//点击search时，执行highlight函数；
     $('#search_close').click(function (e) {
+        clearSelection();//先清空一下上次高亮显示的内容；
         $(this).hide();
         $("#search_btn").val("页内查找");
         $("#search_btn").css("position","static");
     });
-
+    $('#searchstr').keydown(function (e) {
+        var key = e.which;
+        if (key == 13) highlight();
+    });
     $(".ui-btn-left_pre").click(function(){
         var   backUrl= $(this).attr('data-url');
-        if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){ // IE
-            if(history.length > 0){
-                window.history.go( -1 );
-            }else{
-                window.location.href =backUrl;
-            }
-        }else{ //非IE浏览器
-            if (navigator.userAgent.indexOf('Firefox') >= 0 ||
-                navigator.userAgent.indexOf('Opera') >= 0 ||
-                navigator.userAgent.indexOf('Safari') >= 0 ||
-                navigator.userAgent.indexOf('Chrome') >= 0 ||
-                navigator.userAgent.indexOf('WebKit') >= 0){
-                if(window.history.length > 1){
-                    window.history.go( -1 );
-                }else{
-                    window.location.href =backUrl;
-                }
-            }else{ //未知的浏览器
-                window.history.go( -1 );
-            }
+        if(history.length > 0){
+            window.history.go( -1 );
+        }else{
+            window.location.href =backUrl;
         }
     });
 });
@@ -132,14 +120,10 @@ function highlight(){
     if (flag == 1) {
         if ($(".highlight").length> 1) {
             var _top = $(".highlight").eq(i).offset().top+$(".highlight").eq(i).height();
-            var _tip = $(".highlight").eq(i).parent().find("strong").text();
-            if(_tip=="") _tip = $(".highlight").eq(i).parent().parent().find("strong").text();
+
             var _left = $(".highlight").eq(i).offset().left;
-            var _tipWidth = $("#tip").width();
-            if (_left > $(document).width() - _tipWidth) {
-                _left = _left - _tipWidth;
-            }
-            $("#tip").html(_tip).show();
+
+            $("#tip").show();
             $("#tip").offset({ top: _top, left: _left });
             $("#search_btn").val("下一个 "+(i+1)+"/"+$(".highlight").length+"");
             $("#search_btn").css("position","fixed");
@@ -148,16 +132,17 @@ function highlight(){
             $("#search_btn").css("z-index","3");
             $("#search_close").css("right", (($(window).width()-$("body").width())/2+5) + "px");
             $("#search_close").show();
+            $(".highlight").eq(i).css("backgroundColor","#ff9632");
+            $(".highlight").eq(i).css("color","#000000");
         }else{
+            $(".highlight").css("backgroundColor","#ff9632");
+            $(".highlight").css("color","#000000");
             var _top = $(".highlight").offset().top+$(".highlight").height();
-            var _tip = $(".highlight").parent().find("strong").text();
             var _left = $(".highlight").offset().left;
             $('#tip').show();
             $("#tip").html(_tip).offset({ top: _top, left: _left });
         }
-        var _tWidth = $(window).width() - $(".highlight").eq(i).offset().left-4;
-        /* 虽然有漏洞，但是效果过得去*/
-        if(_tWidth> $("#tip").width()){ _tWidth= $("#tip").width();}
+        var _tWidth =  $(".highlight").eq(i).width();
         $("#tip").css("width",_tWidth);
         $("html, body").animate({ scrollTop: _top - 92 });
         i++;
@@ -167,10 +152,6 @@ function highlight(){
     }
 }
 
-$('#searchstr').keydown(function (e) {
-    var key = e.which;
-    if (key == 13) highlight();
-});
 function clearSelection(){
     $('#content p,#content div').each(function(){
         //找到所有highlight属性的元素；
