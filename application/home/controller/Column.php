@@ -195,9 +195,9 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
-        /*if($_GET[act]=='edit'){
+        if($_GET[act]=='edit'){
             return $this->edit($name,$id);
-        }else if($_GET[act]=='add'){
+        }/*else if($_GET[act]=='add'){
             return $this->add($name);
         }*/
         $result = $this->validate(['columnName' => $name, 'id' => $id], ['columnName|栏目标识' => 'require|alpha', 'id|文档ID' => 'require|number']);
@@ -274,12 +274,13 @@ class Column extends Common {
             $data['modelField']['video_url']=$data['video_url'];
             $data['modelField']['content']=$data['content'];
             try {
-                $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
+               // $ModelField->editModelData($columnInfo['model_id'], $data['modelField'], $data['modelFieldExt'], ['cname']);
             } catch (\Exception $ex) {
                 $this->error($ex->getMessage());
             }
-            Cache::clear('db_' . $columnInfo['table']);
-            $this->success('模型内容编辑成功~', url('column/index', ['name' => $cname]));
+            //Cache::clear('db_' . $columnInfo['table']);
+            $this->success('模型内容编辑成功~', FanJianConvert::joinUrl(url('column/content', ['name' => $cname,
+                'id' => $id]),'scrollTo='.$data['title']),'',0);
         } else {
             $contentId = intval($id);
             if (!$contentId) {

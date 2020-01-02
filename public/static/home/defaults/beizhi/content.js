@@ -157,7 +157,7 @@ function highlight(){
             var _top = $(".highlight").offset().top+$(".highlight").height();
             var _left = $(".highlight").offset().left;
             $('#tip').show();
-            $("#tip").html(_tip).offset({ top: _top, left: _left });
+            $("#tip").offset({ top: _top, left: _left });
         }
         var _tWidth =  $(".highlight").eq(i).width();
         $("#tip").css("width",_tWidth);

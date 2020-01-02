@@ -269,19 +269,28 @@
             $("#goTop").css("display", "none");
         }
     });
-    $('#searchstr').val(unescape("{$_GET[searchText]}"));
+    $('#searchstr').val(decodeURI("{$_GET[searchText]}"));
     setTimeout( function () {
             $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");
         var url = window.location.href;
         var arr;
-        if (url.match(/scrollTo([^;]+)(;|$)/) != null) {
-             arr = url.match(/scrollTo([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+        if (url.match(/scrollTo=([^;]+)(;|$)/) != null) {
+            var html = $('#content').html();
+            var searchText=decodeURI("{$_GET[scrollTo]}");
+            var regExp = new RegExp(searchText, 'g');
+            var newHtml = html.replace(regExp, '<span class="highScroll">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
+            $('#content').html(newHtml);//更新；
+            if($(".highScroll")>0) {
+                var _top = $(".highScroll").eq(0).offset().top + $(".highScroll").height();
+                $("html, body").animate({scrollTop: _top - 92});
+            }
         }else{
             if (document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/) != null) {
              arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
+             document.body.scrollTop = parseInt(arr[1]);
            }
         }
-        if(null!=arr){document.body.scrollTop = parseInt(arr[1]);}
+
         },50
     );
     $('#next_click').on('click',function(){

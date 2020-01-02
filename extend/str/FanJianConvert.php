@@ -32,11 +32,7 @@ class FanJianConvert{
               foreach ($list2 as $key2 => $data2) {
                   if(isset($list2[$key2]['sound_url'])) {
                       if ("fohao" == $list2[$key2]['cname']) {
-                          if (stripos($list2[$key2]['url'], "?") > 0) {
-                              $list2[$key2]['url'] .= "&playSound=1";
-                          } else {
-                              $list2[$key2]['url'] .= "?playSound=1";
-                          }
+                          self::joinUrl($list2[$key2],"playSound=1");
                       }
                   }
               }
@@ -45,4 +41,13 @@ class FanJianConvert{
       }
       return $list;
   }
+
+    public static function joinUrl($url,$str){
+        if (stripos($url, "?") > 0) {
+            $url .= "&".$str;
+        } else {
+            $url .= "?".$str;
+        }
+      return $url;
+    }
 }
