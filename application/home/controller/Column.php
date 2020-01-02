@@ -255,7 +255,7 @@ class Column extends Common {
         if (empty($cname)) {
             $this->error('参数错误~');
         }
-        $columnInfo = Db::view('column', 'name,title,model_id')
+        $columnInfo = Db::view('column', 'name,model_id')
             ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
             ->where('column.name', $cname)
             ->where('column.status', 1)
