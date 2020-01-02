@@ -281,8 +281,7 @@
              arr = document.cookie.match(/scrollTop{$data['id']}=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置
            }
         }
-        $('body,html').animate({scrollTop: parseInt(arr[1])}, 100);
-        //document.body.scrollTop = parseInt(arr[1]);
+        if(null!=arr){document.body.scrollTop = parseInt(arr[1]);}
         },50
     );
     $('#next_click').on('click',function(){
