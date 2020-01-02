@@ -76,11 +76,6 @@ $(function(){
 
     $(".ui-btn-left_pre").click(function(){
         var   backUrl= $(this).attr('data-url');
-        if(scrollFlag){
-        }else{
-            window.location.href =backUrl;
-            return;
-        }
         if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){ // IE
             if(history.length > 0){
                 window.history.go( -1 );
