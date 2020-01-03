@@ -255,7 +255,7 @@ class Column extends Common {
         if (empty($cname)) {
             $this->error('参数错误~');
         }
-        $columnInfo = Db::view('column', 'name,model_id')
+        $columnInfo = Db::view('column', 'name,title,model_id')
             ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
             ->where('column.name', $cname)
             ->where('column.status', 1)
@@ -296,7 +296,7 @@ class Column extends Common {
             if (empty($data)) {
                 abort(404, '内容不存在或未审核');
             }
-
+            $data['title']="";
             $this->assign([
                 'info' => $columnInfo,
                 'placeList' => $placeList,
