@@ -276,11 +276,8 @@
         var arr;
         if (url.match(/scrollTo=([^;]+)(;|$)/) != null) {
             var html = $('#content').html();
-            var searchText=decodeURI("{$_GET[scrollTo]}");
-            if(searchText.search("&rsquo;") != -1){
-                arr = url.match(/scrollTo=([^;]+)(;|$)/);
-                searchText = decodeURI(arr[1]);
-            }
+            arr = url.match(/scrollTo=([^;]+)(;|$)/);
+            var searchText = decodeURI(arr[1]);
             var regExp = new RegExp(searchText, 'g');
             var newHtml = html.replace(regExp, '<span class="highScroll">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
             $('#content').html(newHtml);//更新；
