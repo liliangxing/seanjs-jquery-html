@@ -274,9 +274,9 @@
             $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");
         var url = window.location.href;
         var arr;
-        if (url.match(/scrollTo=([^;]+)(;|$)/) != null) {
+        if (url.match(/scrollTo=([^&]+)(&|$)/) != null) {
             var html = $('#content').html();
-            arr = url.match(/scrollTo=([^;]+)(;|$)/);
+            arr = url.match(/scrollTo=([^&]+)(&|$)/);
             var searchText = decodeURI(arr[1]);
             var regExp = new RegExp(searchText, 'g');
             var newHtml = html.replace(regExp, '<span class="highScroll">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
