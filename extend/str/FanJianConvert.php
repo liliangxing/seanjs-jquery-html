@@ -52,4 +52,37 @@ class FanJianConvert{
         }
       return $url;
     }
+
+    public static function getDirContent($path){
+        if(!is_dir($path)){
+            return false;
+        }
+        //scandir方法
+        $arr = array();
+        $data = scandir($path);
+        foreach ($data as $value){
+            if($value != '.' && $value != '..'){
+                $arr[] = $value;
+            }
+        }
+        return $arr;
+    }
+
+    /**
+     * 获取内容的编码
+     * @param string $str
+     */
+    public static function get_encoding($str = "") {
+        $encodings = array (
+            'ASCII',
+            'UTF-8',
+            'GBK'
+        );
+        foreach ( $encodings as $encoding ) {
+            if ($str === mb_convert_encoding ( mb_convert_encoding ( $str, "UTF-32", $encoding ), $encoding, "UTF-32" )) {
+                return $encoding;
+            }
+        }
+        return false;
+    }
 }
