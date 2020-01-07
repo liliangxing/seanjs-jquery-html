@@ -251,7 +251,8 @@ a, input, textarea {
 }
 
 .blog-all .click {
-    float: left
+    float: left;
+    width: 7.3rem;
 }
 
 .blog-all .b-ft-icon {
