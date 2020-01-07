@@ -25,6 +25,7 @@ $(function(){
 
     $("#goTop").click(function () {
         scrollFlag = false;
+        canScrollFlag = false;
         $('body,html').animate({scrollTop: 0}, 100);
         setTimeout(function () {
             canScrollFlag = true;
