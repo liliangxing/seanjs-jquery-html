@@ -53,3 +53,12 @@ div#content p br{line-height: 2.2;}
 	display: inline-block;
 	width: 1.4em;
 }
+.pre_next{
+	position:relative; width:30px; height:30px;margin-top: 8px;margin-bottom:4px;float: right;
+}
+#pre_click{
+	background: url('../img/prev.png') no-repeat ;background-size:30px auto;
+}
+#next_click{
+	background: url('../img/next.png') no-repeat ;background-size:30px auto; margin-left: 30px;
+}
