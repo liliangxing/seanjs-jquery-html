@@ -1,4 +1,6 @@
 <?php
+require_once './extend/str/FanJianConvert.php';
+use str\FanJianConvert;
 session_start();
 if (empty($page)) {$page=1;}
 if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
@@ -8,18 +10,30 @@ mysql_select_db('sq_ukcms', $conn) or die("Invalid query: " . mysql_error());
 
 
 $counter=file_get_contents("test/txt/example.txt"); //读取txt文件内容到$counter
-$counter = iconv("GBK", "UTF-8", $counter);
+$file = iconv("GBK", "UTF-8", $counter);
+$newFile="";
+$token = strtok($file, "\n");
+while ($token != false)
+{
+    $token = strtok("\n");
+    if(FanJianConvert::ccStrLen($token)<50){
+        $newFile .= $token;
+    }else{
+        $newFile .= str_replace(" ","",$token);
+    }
+}
+$counter = $newFile;
 $length=mb_strlen($counter);
 $pageLength = 6600;
 $page_count=ceil($length/$pageLength);
 $i=$page;
-for($i = 1 ;$i<114 ; $i++){
+for($i = 1 ;$i<$page_count+1 ; $i++){
 
     $c=mb_substr($counter,0,($i-1)*$pageLength);
     $c1=mb_substr($counter,0,$i*$pageLength);
 
     $file = mb_substr($c1,mb_strlen($c),mb_strlen($c1)-mb_strlen($c));
-    $articleId= 547 + $i;
+    $articleId= 622 + $i;
 
 
 $title = '净土圣贤录白话文-第'.$i.'页';
@@ -42,8 +56,8 @@ if (array_shift($result)){
 function loadTxtDataIntoDatabase($articleId,$title,$file,$i,$table,$conn,$fields=array(),$insertType='INSERT'){
   if(empty($fields)) {$head = "{$insertType} INTO `{$table}` VALUES('";}
   else {
-      $head = "{$insertType} INTO `{$table}`( `cname`, `ifextend`, `uid`, `places`, `title`, `create_time`, `update_time`, `orders`, `status`, `hits`, `source`, `description`, `cover`, `keywords`, `color`, `content`) VALUES
-      (  'jtsxl', 0, 1, '', '".$title."',  '0',  '0', '".$i."', 1, 0, '', '', 0, '".$title."', ''";
+      $head = "{$insertType} INTO `{$table}`(  `id`,`cname`, `ifextend`, `uid`, `places`, `title`, `create_time`, `update_time`, `orders`, `status`, `hits`, `source`, `description`, `cover`, `keywords`, `color`, `content`) VALUES
+      ( '".$articleId."', 'jtsxl', 0, 1, '', '".$title."',  '0',  '0', '".$i."', 1, 0, '', '', 0, '".$title."', ''";
   }  //数据头
 
     $sqldata = trim($file);

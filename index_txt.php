@@ -1,4 +1,6 @@
 <?php
+require_once './extend/str/FanJianConvert.php';
+use str\FanJianConvert;
 session_start();
 if (empty($page)) {$page=1;}
 if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
@@ -21,7 +23,19 @@ if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
             <?php
             if($page){
                 $counter=file_get_contents("test/txt/example.txt"); //读取txt文件内容到$counter
-                $counter = iconv("GBK", "UTF-8", $counter);
+                $file = iconv("GBK", "UTF-8", $counter);
+                $newFile="";
+                $token = strtok($file, "\n");
+                while ($token != false)
+                {
+                    $token = strtok("\n");
+                    if(FanJianConvert::ccStrLen($token)<50){
+                        $newFile .= $token;
+                    }else{
+                        $newFile .= str_replace(" ","",$token);
+                    }
+                }
+                $counter = $newFile;
                 $length=mb_strlen($counter,"UTF-8");
                 $pageLength = 6600;
                 $page_count=ceil($length/$pageLength);

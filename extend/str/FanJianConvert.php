@@ -85,4 +85,34 @@ class FanJianConvert{
         }
         return false;
     }
+
+    /** 统计汉字的个数
+     * @param $str
+     * @return float|int
+     */
+public static function ccStrLen($str)
+    {
+        $ccLen=0;
+        $ascLen=strlen($str);
+        $ind=0;
+        $hasCC=ereg("[xA1-xFE]",$str); #判断是否有汉字
+        $hasAsc=ereg("[x01-xA0]",$str); #判断是否有ASCII字符
+        if($hasCC && !$hasAsc) #只有汉字的情况
+            return strlen($str)/2;
+        if(!$hasCC && $hasAsc) #只有Ascii字符的情况
+            return strlen($str);
+        for($ind=0;$ind<$ascLen;$ind++)
+        {
+            if(ord(substr($str,$ind,1))>0xa0)
+            {
+                $ccLen++;
+                $ind++;
+            }
+            else
+            {
+                $ccLen++;
+            }
+        }
+        return $ccLen;
+    }
 }
