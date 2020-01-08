@@ -17,9 +17,9 @@ while ($token != false)
 {
     $token = strtok("\n");
     if(FanJianConvert::ccStrLen($token)<50){
-        $newFile .= $token;
+        $newFile .= "\n".$token;
     }else{
-        $newFile .= str_replace(" ","",$token);
+        $newFile .= "\n".str_replace(" ","",$token);
     }
 }
 $counter = $newFile;
@@ -62,6 +62,7 @@ function loadTxtDataIntoDatabase($articleId,$title,$file,$i,$table,$conn,$fields
 
     $sqldata = trim($file);
     $sqldata = str_replace("'","\'",$sqldata);
+    $sqldata = str_replace("\r\n\r\n","\r\n",$sqldata);
     $sqldata = str_replace("\r\n","<br/>",$sqldata);
     $sqldata = str_replace("　　 ","　　",$sqldata);
     $sqldata = str_replace("　　　","　　",$sqldata);
