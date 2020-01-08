@@ -91,7 +91,7 @@
             <link href="__STATIC__/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
             <script type="text/javascript" src="__STATIC__/home/defaults/projekktor/projekktor-1.3.09.js"></script>
             <video id="player_a" class="projekktor" poster="__STATIC__/home/defaults/projekktor/intro.png"
-                   title="{$data.title}" width="100%" height="385" controls>
+                   title="{$data.title}" width="100%" style="margin-top: 5px;" height="385" controls>
                 <source src="{$data.video_url}" type="video/mp4"/>
             </video>
             <script type="text/javascript">
@@ -191,7 +191,7 @@
         <a class="more"  href="?playSound=0">返回文字版</a>
         {/if}
 
-    <div class="text" id="content">
+    <div class="text" id="content" data-id="{$data.cname}">
 
             <p>
             </p>

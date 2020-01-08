@@ -22,7 +22,9 @@ window.onload = function () {
 };
 
 $(function(){
-
+    if($("#content").attr("data-id")=="lfssysj"){
+        $("#content").prepend("<p align='center'><img src='http://www.time24.cn/public/uploads/images/20200107/c87169c995c6d6dacd62b79dba7af90e.jpg'/></p>");
+    }
     $("#goTop").click(function () {
         scrollFlag = false;
         canScrollFlag = false;
