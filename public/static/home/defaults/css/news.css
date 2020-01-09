@@ -2306,7 +2306,7 @@ margin-left:-110px;
     min-width: 320px;
 	overflow-x: hidden;}
 #activity-detail{background:#F0EFEF;}
-#news .text{ margin:15px 0; word-wrap: break-word;}
+#news .text{ margin:0.5rem 0 ; word-wrap: break-word;}
 .text em{ font-style:italic}
 .showpic img{
     width: 100%;margin-top: 5px;
