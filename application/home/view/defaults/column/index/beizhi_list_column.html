@@ -37,7 +37,8 @@
                         <div id="pl-home-bloglist" style="display: block;">
                             <article class="bl-content">
                                 <ul data-role="list" class="cont-txt-tit-ls">
-                                    {uk:select table="column"  field="title,name,cover_picture" where="path like '%,[$info.id],%'"}
+                                    {uk:select table="column"  field="title,name,cover_picture" where="path like '%,[$info.id],%'"
+                                    order="id asc"}
                                         <li class="txt-tit pic-txt-tit " data-role="item">
                                             <a data-role="link" href="{:url('column/index',['name'=>$vo.name])}"  class="pic-tit-lk">
                                                 {if $vo.cover_picture}

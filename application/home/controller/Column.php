@@ -195,8 +195,8 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
-        if($_GET[act]=='edit'){
-            return $this->edit($name,$id);
+        if($_GET[act]=='scollTo'){
+            return $this->scollTo($name,$id);
         }/*else if($_GET[act]=='add'){
             return $this->add($name);
         }*/
@@ -356,6 +356,50 @@ class Column extends Common {
             ]);
             return  $this->display('column/content/beizhi_edit');
         }
+    }
+
+    protected function scrollTo($cname = '', $id = 0)
+    {
+        if (empty($cname)) {
+            $this->error('参数错误~');
+        }
+        $columnInfo = Db::view('column', 'name,title,model_id')
+            ->view('model', 'table', 'column.model_id=model.id', 'LEFT')
+            ->where('column.name', $cname)
+            ->where('column.status', 1)
+            ->where('model.status', 1)
+            ->find();
+        if (empty($columnInfo)) {
+            return $this->error('栏目或内容模型不存在或被冻结');
+        }
+        $ModelField = model('ModelField');
+
+            $contentId = intval($id);
+            if (!$contentId) {
+                $this->error('参数错误cid~');
+            }
+            $placeList = Db::name('place')->where('mid', $columnInfo['model_id'])->whereOr('mid', 0)->order('orders,id desc')->column('id,title');
+            $fieldList = model('ModelField')->getFieldList($columnInfo['model_id'], $contentId);
+
+
+            $modelTable = $ModelField->getModelInfo($columnInfo['model_id'], 'table');
+            //内容所有字段
+            $data = $ModelField->getDataInfo($modelTable, "id='" . $id . "' and  cname='" . $cname . "' and status='1'", '*', '*');
+            if (empty($data)) {
+                abort(404, '内容不存在或未审核');
+            }
+            $data['title']="";
+            $this->assign([
+                'info' => $columnInfo,
+                'placeList' => $placeList,
+                'fieldList' => $fieldList,
+                'id' => $contentId,
+                'data' => $data,
+                'columnTitle' => $columnInfo['title']
+            ]);
+
+            return  $this->display('column/content/beizhi_scrollTo');
+
     }
 
 }

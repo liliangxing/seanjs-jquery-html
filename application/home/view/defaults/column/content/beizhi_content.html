@@ -29,7 +29,7 @@
         <div  style="display:none" id='right_nav'>
             <a class="ui-btn-right_home"
                style="background: url('__STATIC__/home/defaults/img/editpage32.png') no-repeat center center;background-size:24px auto;"
-               href="?act=edit"></a>
+               href="javascript:scrollTo();"></a>
             <a class="ui-btn-right_home"
                style="background: url('__STATIC__/home/defaults/img/add_up.png') no-repeat center center;background-size:24px auto;right:15%"
                href="?act=add"></a>
@@ -192,11 +192,7 @@
         <a class="more"  href="?playSound=0">返回文字版</a>
         {/if}
 
-    <div class="text" id="content" data-id="{$data.cname}">
-
-            <p>
-            </p>
-
+     <div class="text" id="content" data-id="{$data.cname}">
         <p>
 
             {$data.content|raw}
@@ -204,7 +200,9 @@
         <p>&nbsp;</p>
 
         <p>
-            <span style="font-size: 14px;">欢迎关注悲智佛网微信公众号，长按图片，识别二维码</span><br/>
+            <span style="font-size: 14px;">欢迎关注悲智佛网微信公众号，长按图片关注或网址访问<a href="http://www.time24.cn">
+                http://www.time24.cn
+            </a> </span><br/>
         <div align="center">
             <img style="width: 80%" src="__STATIC__/home/defaults/img/qrcode.jpg"></div>
         <span style="font-size: 14px;">
@@ -240,7 +238,7 @@
 
 </div>
 
-    {uk:select table="column"  field="title,name" where="model_id='2'"}
+    {uk:select table="column"  field="title,name" where="model_id='2'" order="id asc"}
     <a class="more_col" href="{:url('column/index',['name'=>$vo.name])}"><span>{$vo.title}</span></a>
     {/uk:select}
 
