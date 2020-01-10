@@ -270,3 +270,16 @@ function getUrlParam(name) {
 function scrollTo() {
     window.location.href =  changeURLArg(window.location.href, "act", "scrollTo");
 }
+
+function gotoVideo(sc) {
+    var gotoVideo_value=getCookie("gotoVideo"+sc);
+    var url = changeURLArg(location.href, "playVideo", "1");
+    if(gotoVideo_value!="1") {
+        if (confirm('您可以在开启wifi的环境下，打开收看')) {
+            setCookie("gotoVideo" + sc, 1, 70);
+            location.href = url;
+        }
+    }else{
+        location.href = url;
+    }
+}
