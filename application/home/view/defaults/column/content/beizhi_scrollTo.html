@@ -41,7 +41,7 @@
                 alert("请输入标题", 2000);
                 return;
             }
-            var reg = new RegExp("(\\?|&)act=scrollTo");
+            var reg = new RegExp("(\\?|&)act=([^&]*)(&|$)");
             window.location.href =  changeURLArg(window.location.href.replace(reg,''), "scrollTo",title);
         }
     </script>
