@@ -22,8 +22,22 @@ window.onload = function () {
 };
 
 $(function(){
-    if($("#content").attr("data-id")=="lfssysj"){
-        $("#content").prepend("<p align='center'><img src='http://www.time24.cn/public/uploads/images/20200107/c87169c995c6d6dacd62b79dba7af90e.jpg'/></p>");
+    var cnanme = $("#content").attr("data-id");
+    switch (cnanme) {
+        case "lfssysj":
+            $("#content").prepend("<p align='center'><img src='http://www.time24.cn/public/uploads/images/20200107/c87169c995c6d6dacd62b79dba7af90e.jpg'/></p>");
+            break;
+        case "jtsxlbhw":
+            doximalaya();
+            break;
+        case "jtsxlwyw":
+            doximalaya();
+            break;
+    }
+    function doximalaya(){
+        $("#content").prepend(`<p><a href='https://m.ximalaya.com/share/album/29460242' target="_blank">
+净土圣贤录白话 音频（645集）
+</a></p>`);
     }
     $("#goTop").click(function () {
         scrollFlag = false;
