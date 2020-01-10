@@ -54,8 +54,9 @@ div#content p br{line-height: 2.2;}
 	width: 1.4em;
 }
 .pre_next{
-	position:relative; width:30px; height:30px;margin-top: 0.7rem;margin-bottom:0.7rem;float: right;
+	position:relative; width:30px; height:30px;float: right;display: none;
 }
+.pre_next_box{height: 30px;margin-top: 0.7rem;margin-bottom:0.7rem;}
 #pre_click{
 	background: url('../img/prev.png') no-repeat ;background-size:30px auto;
 }

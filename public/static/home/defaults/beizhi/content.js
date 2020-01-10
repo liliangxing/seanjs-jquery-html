@@ -37,6 +37,9 @@ $(function(){
     function doximalaya(){
         $("#content").prepend("<p><a href='https://m.ximalaya.com/share/album/29460242' target='_blank'>净土圣贤录白话 音频（645集）</a></p>");
     }
+    if(getUrlParam("playVideo")!=1){
+        $(".pre_next_box div").show();
+    }
     $("#goTop").click(function () {
         scrollFlag = false;
         canScrollFlag = false;
