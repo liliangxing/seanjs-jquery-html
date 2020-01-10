@@ -268,5 +268,5 @@ function getUrlParam(name) {
 }
 
 function scrollTo() {
-    window.location.href =  changeURLArg(window.location.href, "action", "scrollTo");
+    window.location.href =  changeURLArg(window.location.href, "act", "scrollTo");
 }

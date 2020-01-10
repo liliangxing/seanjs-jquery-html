@@ -195,8 +195,8 @@ class Column extends Common {
 
 //列表栏目内容
     public function content($name = '', $id = 0) {
-        if($_GET[act]=='scollTo'){
-            return $this->scollTo($name,$id);
+        if($_GET[act]=='scrollTo'){
+            return $this->scrollTo($name,$id);
         }/*else if($_GET[act]=='add'){
             return $this->add($name);
         }*/

@@ -41,7 +41,8 @@
                 alert("请输入标题", 2000);
                 return;
             }
-            window.location.href =  changeURLArg(window.location.href, "scrollTo",title);
+            var reg = new RegExp("(\\?|&)act=scrollTo");
+            window.location.href =  changeURLArg(window.location.href.replace(reg,''), "scrollTo",title);
         }
     </script>
 </head>
@@ -59,7 +60,7 @@
                         </li>
                     </ul>
                 </header>
-                <input id="form_title" class="form_title" type="text" name="title" maxlength="50" placeholder="标题"
+                <input id="form_title" class="form_title" type="text" name="title" maxlength="50" placeholder="文字"
                        value="{$data.title}"/>
 
             </section>
