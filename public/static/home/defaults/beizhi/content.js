@@ -35,9 +35,7 @@ $(function(){
             break;
     }
     function doximalaya(){
-        $("#content").prepend(`<p><a href='https://m.ximalaya.com/share/album/29460242' target="_blank">
-净土圣贤录白话 音频（645集）
-</a></p>`);
+        $("#content").prepend("<p><a href='https://m.ximalaya.com/share/album/29460242' target='_blank'>净土圣贤录白话 音频（645集）</a></p>");
     }
     $("#goTop").click(function () {
         scrollFlag = false;
