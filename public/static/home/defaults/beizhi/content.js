@@ -43,6 +43,9 @@ $(function(){
     $("#goTop").click(function () {
         scrollFlag = false;
         canScrollFlag = false;
+        if($("#search_close").is(":visible")){
+            doClose();
+        }
         $('body,html').animate({scrollTop: 0}, 100);
         setTimeout(function () {
             canScrollFlag = true;
@@ -83,9 +86,8 @@ $(function(){
     $('#search_btn').click(highlight);//点击search时，执行highlight函数；
     $('#search_close').click(function (e) {
         clearSelection();//先清空一下上次高亮显示的内容；
-        $(this).hide();
-        $("#search_btn").val("页内查找");
-        $("#search_btn").css("position","static");
+        doClose();
+
     });
     $('#searchstr').keydown(function (e) {
         var key = e.which;
@@ -297,4 +299,11 @@ function gotoVideo(sc) {
     }else{
         location.href = url;
     }
+}
+
+
+function doClose(){
+    $('#search_close').hide();
+    $("#search_btn").val("页内查找");
+    $("#search_btn").css("position","static");
 }
