@@ -33,6 +33,19 @@ $(function(){
         case "jtsxlwyw":
             doximalaya();
             break;
+        case "wjxjzy":
+            doguanghua();
+            break;
+        case "bet":
+            dobet();
+            break;
+    }
+    function dobet(){
+        $("#content").prepend("<p>来源：<br><a href='http://www.amtb.org.tw/rsd/jiangtang_ch.asp?web_choice=99&web_rel_index=3970' target='_blank'>http://www.amtb.org.tw/rsd/jiangtang_ch.asp?web_choice=99&web_rel_index=3970</a></p>");
+    }
+    function doguanghua(){
+        $("#content_end").css("font-size","0.8em");
+        $("#content_end").append("<p><a href='http://www.amtb.org.tw/pdf/HZ13-08-01.pdf' target='_blank'>《五戒相经笺要集注》广化老法师 注 pdf文件下载 </a></p>");
     }
     function doximalaya(){
         $("#content").prepend("<p><a href='https://m.ximalaya.com/share/album/29460242' target='_blank'>净土圣贤录白话 音频（645集）</a></p>");

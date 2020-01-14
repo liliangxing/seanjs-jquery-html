@@ -35,6 +35,9 @@ class FanJianConvert{
                   if(isset($list2[$key2]['sound_url'])) {
                       if ("fohao" == $list2[$key2]['cname']) {
                           $list2[$key2]['url']=self::joinUrl($list2[$key2]['url'],"playSound=1");
+                      }elseif(
+                          "bet" == $list2[$key2]['cname']) {
+                          $list2[$key2]['url']=self::joinUrl($list2[$key2]['url'],"playVideo=1");
                       }
                   }
               }

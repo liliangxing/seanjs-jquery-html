@@ -12,7 +12,7 @@ class Column extends Validate
         'path|上级栏目' => 'require|regex:^[\d,]+$',
         'model_id|内容模型' => 'require|number',
         'ext_model_id|拓展模型' => 'number',
-        'title|栏目标题' => 'require|chsAlphaNum',
+        'title|栏目标题' => 'require|/^[\x{4e00}-\x{9fa5}a-zA-Z0-9\_\-\(\)\（\）]+$/u',
         'name|栏目英文标识' => 'require|alpha|unique:column|notIn:index,search,sitemap,add,edit,delete,move,setstate,copy,changeorder',
 //        'meta_title|栏目网页标题' => 'chsAlphaNum',
 //        'meta_keywords|栏目网页关键词' => '',
