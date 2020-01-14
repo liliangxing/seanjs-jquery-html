@@ -1088,6 +1088,7 @@ h3 {
     text-align: center;
     text-shadow: 0 2px 2px #000000;
     width: 100%;
+	overflow: hidden;
 }
 .dropdown li:hover {
     background-color: rgba(0, 0, 0, 0.9);
