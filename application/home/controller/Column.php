@@ -88,12 +88,6 @@ class Column extends Common {
                         $keyword = $keyword2;
                     }
                 }
-                if (!empty($keyword)) {
-                    $where.=" and (title like '%$keyword%' or locate('$keyword',content)>0 )";
-                        $fantizi = FanJianConvert::tradition2simple($keyword);
-                        $where = str_replace($keyword, $fantizi, $where);
-                        $this->assign('fantizi', $keyword);
-                }
 
                 //处理栏目列表筛选参数
                 $param = [];
@@ -174,6 +168,19 @@ class Column extends Common {
                     }
                 } else {
                     $columnInfo['listorder'] = 'orders,addtime desc';
+                }
+                $where2 = "1=1 ";
+                if (!empty($keyword)) {
+                    $where2.=" and (locate('$keyword',title)>0 or locate('$keyword',content)>0 )";
+                    $fantizi = FanJianConvert::tradition2simple($keyword);
+                    $where2 = str_replace($keyword, $fantizi, $where2);
+                    $this->assign('fantizi', $keyword);
+                    $where.=" and cname = '$columnInfo[name]' ";
+                    $subQuery = Db::name($modelInfo['table'])
+                        ->where($where)
+                        ->buildSql();
+                    $modelInfo['table'] =$subQuery.' a';
+                    $where = $where2;
                 }
                 $list = model('ModelField')->getDataList($modelInfo['table'], $where, "*", "", $columnInfo['listorder'], "", $page, $columnInfo['id']);
                 if ($list->isEmpty() && 1 != $page[2]['page']) {

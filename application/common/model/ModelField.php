@@ -392,7 +392,12 @@ class ModelField extends \think\Model
         }
         $datalist = $ifcache ? cache($cacheKey) : false;
         if (false === $datalist) {
-            $info = Db::name('model')->where('table', $table)->field('id,type,purpose')->find();
+            if (stristr($table,'select') &&
+                strpos($table, 'article') !== false){
+                $info = Db::name('model')->where('table', 'article')->field('id,type,purpose')->find();
+            }else{
+                $info = Db::name('model')->where('table', $table)->field('id,type,purpose')->find();
+            }
             //判断表是否是模型表
             if (empty($info)) {
 //                if(false == Db::query("SHOW TABLES LIKE '".config('database.prefix').$table."'")){
@@ -455,9 +460,16 @@ class ModelField extends \think\Model
                             ->limit($limit)
                             ->paginate($listRows, $simple, $config);
                 } else {
-                    $datalist = null == $page ?
-                        Db::name($table)->where($where)->field($field)->order($order)->limit($limit)->select() :
-                        Db::name($table)->where($where)->field($field)->order($order)->limit($limit)->paginate($listRows, $simple, $config);
+                    if (stristr($table,'select') &&
+                        strpos($table, 'article') !== false){
+                        $datalist = null == $page ?
+                            Db::table($table)->where($where)->field($field)->order($order)->limit($limit)->select() :
+                            Db::table($table)->where($where)->field($field)->order($order)->limit($limit)->paginate($listRows, $simple, $config);
+                    }else{
+                        $datalist = null == $page ?
+                            Db::name($table)->where($where)->field($field)->order($order)->limit($limit)->select() :
+                            Db::name($table)->where($where)->field($field)->order($order)->limit($limit)->paginate($listRows, $simple, $config);
+                    }
                 }
 
                 //数据格式化处理
