@@ -39,6 +39,12 @@ $(function(){
         case "bet":
             dobet();
             break;
+        case "smlyyl":
+            dosmlyyl();
+            break;
+    }
+    function dosmlyyl(){
+        $("#content").prepend("<p>来源：<a href='http://www.amtb.org.tw/bt/amtb_jindian.asp?web_choice=26&web_amtb_index=266' target='_blank'>http://www.amtb.org.tw/bt/amtb_jindian.asp?web_choice=26&web_amtb_index=266</a></p>");
     }
     function dobet(){
         $("#content").prepend("<p>来源：<br><a href='http://www.amtb.org.tw/rsd/jiangtang_ch.asp?web_choice=99&web_rel_index=3970' target='_blank'>http://www.amtb.org.tw/rsd/jiangtang_ch.asp?web_choice=99&web_rel_index=3970</a></p>");
