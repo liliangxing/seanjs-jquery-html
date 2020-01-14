@@ -267,7 +267,7 @@ function scrollTo() {
 
 function gotoVideo(sc) {
     var gotoVideo_value=getCookie("gotoVideo"+sc);
-    var url = changeURLArg(location.href, "playVideo", "1");
+    var url = changeURLArg(location.href.replace(new RegExp("(\\?|&)playSound=([^&]*)(&|$)"),''), "playVideo", "1");
     if(gotoVideo_value!="1") {
         if (confirm('您可以在开启wifi的环境下，打开收看')) {
             setCookie("gotoVideo" + sc, 1, 70);
