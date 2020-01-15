@@ -93,7 +93,7 @@ class FanJianConvert{
      * @param $str
      * @return float|int
      */
-public static function ccStrLen($str)
+    public static function ccStrLen($str)
     {
         $ccLen=0;
         $ascLen=strlen($str);
@@ -118,4 +118,6 @@ public static function ccStrLen($str)
         }
         return $ccLen;
     }
+
+    public  static $article_list =  "beizhi_list";
 }

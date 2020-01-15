@@ -181,6 +181,7 @@ class Column extends Common {
                         ->buildSql();
                     $modelInfo['table'] =$subQuery.' a';
                     $where = $where2;
+                    $columnInfo['template_list'] =FanJianConvert::$article_list;
                 }
                 $list = model('ModelField')->getDataList($modelInfo['table'], $where, "*", "", $columnInfo['listorder'], "", $page, $columnInfo['id']);
                 if ($list->isEmpty() && 1 != $page[2]['page']) {
