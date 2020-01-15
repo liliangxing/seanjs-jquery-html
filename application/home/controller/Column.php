@@ -175,7 +175,7 @@ class Column extends Common {
                     $fantizi = FanJianConvert::tradition2simple($keyword);
                     $where2 = str_replace($keyword, $fantizi, $where2);
                     $this->assign('fantizi', $keyword);
-                    $where.=" and cname = '$columnInfo[name]' ";
+                    $where = model('ModelField')->joinCnameCondition($where, $columnInfo['id'],$columnInfo['model_id']);
                     $subQuery = Db::name($modelInfo['table'])
                         ->where($where)
                         ->buildSql();

@@ -31,6 +31,12 @@
                                           onclick="location.href='{:url('column/index', ['name' => $info.name])}'">
                                         {$info.title}</span>
 
+
+                                <p class="seach">
+                                    <input type="text" id="txtsearch1" placeholder="请输入关键字" value="{$fantizi}" style="color: #d8c182">
+                                    <input type="button" class="search_btn" onclick="search1()">
+                                </p>
+
                             </a>
                         </div>
                         </form>

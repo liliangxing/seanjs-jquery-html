@@ -431,17 +431,7 @@ class ModelField extends \think\Model
                 }
                 //栏目条件
                 if ($cid && $info['purpose'] == 'column') {
-                    $cnamesArr = $this->getColumnNames($cid, $info['id'], $ifcache);
-                    $cnamesWhere = '';
-                    foreach ($cnamesArr as $vo) {
-                        $cnamesWhere .= "cname ='$vo' or ";
-                    }
-                    if ('' != $cnamesWhere) {
-                        $cnamesWhere = '(' . substr($cnamesWhere, 0, -4) . ')';
-                        $where .= $where ? ' and ' . $cnamesWhere : $cnamesWhere;
-                    } else {
-                        $where = "1=2";
-                    }
+                    $where = $this->joinCnameCondition($where, $cid, $info['id'], $ifcache);
                 }
 //            echo $where;
                 if ($info['type'] == 2 && $field && $extfield) {
@@ -489,6 +479,21 @@ class ModelField extends \think\Model
             }
         }
         return $datalist;
+    }
+
+    public function joinCnameCondition($where,$cid,$info_id,$ifcache = false){
+        $cnamesArr = $this->getColumnNames($cid, $info_id, $ifcache);
+        $cnamesWhere = '';
+        foreach ($cnamesArr as $vo) {
+            $cnamesWhere .= "cname ='$vo' or ";
+        }
+        if ('' != $cnamesWhere) {
+            $cnamesWhere = '(' . substr($cnamesWhere, 0, -4) . ')';
+            $where .= $where ? ' and ' . $cnamesWhere : $cnamesWhere;
+        } else {
+            $where = "1=2";
+        }
+        return $where;
     }
 
     //获取同模型栏目以及子栏目名称
