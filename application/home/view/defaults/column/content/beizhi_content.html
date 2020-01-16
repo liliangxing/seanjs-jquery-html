@@ -275,7 +275,15 @@
         if (url.match(/scrollTo=([^&]+)(&|$)/) != null) {
             var html = $('#content').html();
             arr = url.match(/scrollTo=([^&]+)(&|$)/);
-            var searchText = decodeURI(arr[1]).split(" ")[0];
+            var arrText = decodeURI(arr[1]).split(" ");
+            var searchText = arrText[0];
+            //只开发到两处空格的情况，多处空格的文本很少出现
+            if(arrText.length>1) {
+                var twoEmpty = arrText[0] + " " + arrText[1];
+                if(html.indexOf(twoEmpty)!=-1){
+                    searchText = twoEmpty;
+                }
+            }
             var regExp = new RegExp(searchText, 'g');
             var newHtml = html.replace(regExp, '<span class="highScroll">'+searchText+'</span>');//将找到的关键字替换，加上highlight属性；
             $('#content').html(newHtml);//更新；
