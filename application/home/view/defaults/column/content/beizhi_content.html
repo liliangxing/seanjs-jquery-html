@@ -185,7 +185,7 @@
     </div>
 {/if}
         {if $_GET[playVideo] neq '1' && $data.video_url neq ''}
-        <a class="more"  href="javascript:gotoVideo('{$data.cname}');">点击进入视频</a>
+        <a class="more" data-id="{$data.cname}" href="?playVideo=1">点击进入视频</a>
         {/if}
         {if $_GET[playSound] neq '1' && $data.sound_url neq ''}
         <a class="more" href="?playSound=1">点击进入mp3</a>
