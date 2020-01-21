@@ -294,7 +294,7 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-function scrollTo() {
+function scrollToKeyword() {
     window.location.href =  changeURLArg(window.location.href, "act", "scrollTo");
 }
 
