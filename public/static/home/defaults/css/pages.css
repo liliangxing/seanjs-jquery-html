@@ -860,12 +860,11 @@ a, input, textarea {
 
 .pages{ margin : 10px auto; width: 96%; text-align: center; }
 .pages .current,.pages a{
-     display: inline-block;
+     display:inline-block;
 padding: 0px 16px;
 height: 22px;
 line-height: 22px;
 font-size:16px;
-margin:10px 0 0 0;
 }
 .pages .current{
    

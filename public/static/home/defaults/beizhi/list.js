@@ -12,7 +12,7 @@ function loadPage(value){
 };
 
 function gotoPage(){
-    var url=$('#z').val();
+    var url=document.getElementById("fisrt").dataset.val;
     location.href=url;
 };
 
