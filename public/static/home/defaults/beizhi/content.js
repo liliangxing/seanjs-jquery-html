@@ -73,7 +73,7 @@ $(function(){
     if(getUrlParam("playVideo")!=1){
         $(".pre_next_box div").show();
     }
-    $("#goTop").click(function () {
+    $("#goTop,#backTop").click(function () {
         scrollFlag = false;
         canScrollFlag = false;
         if($("#search_close").is(":visible")){
