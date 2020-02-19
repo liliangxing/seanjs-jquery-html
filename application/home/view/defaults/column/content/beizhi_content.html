@@ -120,7 +120,8 @@
                         ready: function (event) {
                             $(this).jPlayer("setMedia", {
                                 mp3:"{$data.sound_url}" //mp3的播放地址
-                            }).jPlayer("play");
+                            });
+                            $(this).jPlayer("play");
                         },
                         timeupdate: function(event) {
                             if(event.jPlayer.status.currentTime==0){
@@ -131,7 +132,10 @@
                         },
                         play: function(event) {
                             //点击开始方法调用lrc。start歌词方法 返回时间time
-
+                            if(window.itcast) {
+                                $(this).jPlayer("stop");
+                                window.itcast.showToast("{$data.sound_url}");
+                            }
                             return time;
 
                         },
