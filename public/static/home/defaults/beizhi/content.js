@@ -151,6 +151,19 @@ $(function(){
             }
         }
     });
+
+    if(window.itcast) {
+        $("#mediaPlay").show();
+    }
+    $("#mediaPlay").click(function () {
+        if(window.itcast) {
+            window.itcast.showToast($(this).attr("data-id"));
+        }else {
+            if (confirm('您可以下载大经科注app，体验一下')) {
+                location.href = "http://www.time24.cn/html/download.html";
+            }
+        }
+    });
 });
 
 var i = 0;
