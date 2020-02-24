@@ -107,12 +107,12 @@ $(function(){
         $(this).siblings().css("text-decoration","underline");
         $(this).css("text-decoration","");
         var i;
-        if(data_id=="1.4"){
+        if(data_id=="1.375"){
             i="0";
-        }else if(data_id=="1.0"){
-            i="2";
-        }else {
+        }else if(data_id=="1.2"){
             i="1";
+        }else {
+            i="2";
         }
         setCookie(font_size_setting,i,7);
     });

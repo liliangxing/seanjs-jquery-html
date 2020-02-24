@@ -2302,7 +2302,7 @@ margin-left:-110px;
 	opacity:0;
 }
 /*news*/
-#news{background-color:#F0EFEF;margin: 0 auto;
+#news{margin: 0 auto;
     max-width: 640px;
     min-width: 320px;
 	overflow-x: hidden;}
@@ -2312,7 +2312,7 @@ margin-left:-110px;
 .showpic img{
     width: 100%;margin-top: 5px;
 }
-.page-bizinfo{padding:15px 9px 0 10px;}
+.page-bizinfo{padding:15px 1rem 0 1rem;}
 .page-bizinfo .header #activity-name {
 	font-size:20px;
 	color:#000;
@@ -2482,7 +2482,7 @@ margin-left:-110px;
 	-moz-border-radius:26px;
 	border-radius:26px;
 	cursor: pointer;
-	background-color:#FFFFFF;
+	background-color:#f7f7f7;
 	margin:10px 0;
 	padding:10px;
 	text-align:center;
