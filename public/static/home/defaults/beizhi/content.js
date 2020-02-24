@@ -114,7 +114,7 @@ $(function(){
         }else {
             i="2";
         }
-        setCookie(font_size_setting,i,7);
+        setCookie(font_size_setting,i,365);
     });
     $('#search_btn').click(highlight);//点击search时，执行highlight函数；
     $('#search_close').click(function (e) {
