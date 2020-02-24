@@ -164,6 +164,8 @@ $(function(){
             }
         }
     });
+
+    $( 'body' ).append( tipsDiv );
 });
 
 var i = 0;
@@ -246,7 +248,6 @@ function clearSelection(){
 
 //mask
 var tipsDiv = '<div class="tipsClass"></div>';
-$( 'body' ).append( tipsDiv );
 function showTips( tips, height, time,left ){
     var windowWidth = document.documentElement.clientWidth;
     $('.tipsClass').text(tips);
