@@ -1,8 +1,6 @@
 html, body {
-	/*position:relative;
-	height:100%;*/
 	color:#222;
-	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	font-family:-apple-system-font,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Microsoft YaHei",Arial,sans-serif;
 	/*background-color:#f0f0f0;*/
 	margin:0;
 	padding: 0;
