@@ -2475,6 +2475,7 @@ margin-left:-110px;
 	display: block;
 }
 #news .more{
+	border: 1px solid #efefef;
 	-webkit-border-radius:26px;
 	-moz-border-radius:26px;
 	border-radius:26px;
