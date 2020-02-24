@@ -3,7 +3,7 @@ function search1() {
         alert("请输入搜索条件！")
     }
     else {
-        $('[name="condition"]').val("searchText="+document.getElementById("txtsearch1").value);
+        $('[name="condition"]').val("q="+document.getElementById("txtsearch1").value);
         $('#search').submit();
     }
 }

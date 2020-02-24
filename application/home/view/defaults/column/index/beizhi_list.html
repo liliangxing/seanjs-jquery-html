@@ -47,7 +47,7 @@
                                 <ul data-role="list" class="cont-txt-tit-ls">
                                     {volist name="list.data" id="vo"}
                                         <li class="txt-tit pic-txt-tit " data-role="item">
-                                            <a data-role="link" href="{$vo.url}{if !empty($fantizi)}?searchText={$fantizi}{/if}"  class="pic-tit-lk">
+                                            <a data-role="link" href="{$vo.url}{if !empty($fantizi)}?q={$fantizi}{/if}"  class="pic-tit-lk">
                                                 {if $vo.cover.path}
                                                 <div class="pic b-pic-style" style='background-image: url("__UPLOAD__/{$vo.cover.path}");'>
                                                 </div>

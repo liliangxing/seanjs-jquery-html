@@ -268,7 +268,7 @@
             $("#goTop").css("display", "none");
         }
     });
-    $('#searchstr').val(decodeURI("{$_GET[searchText]}"));
+    $('#searchstr').val(decodeURI("{$_GET[q]}"));
     setTimeout( function () {
             $('.header_font').find('span').eq(parseInt(font_size)).trigger("click");
         var url = window.location.href;

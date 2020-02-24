@@ -77,13 +77,13 @@ class Column extends Common {
                 //条件输出变量
                 $conditionParam = [];
                 $param = paramdecode($condition);
-                $keyword=$param['searchText'];
+                $keyword=$param['q'];
 
                 //捕获不到$condition,使用$_GET[]方法
                 if(empty($condition)) {
                     $condition=$_GET['condition'];
                     $param2 = paramdecode($condition);
-                    $keyword2 = $param2['searchText'];
+                    $keyword2 = $param2['q'];
                     if (empty($keyword)) {
                         $keyword = $keyword2;
                     }
