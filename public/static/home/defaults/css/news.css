@@ -2300,7 +2300,7 @@ margin-left:-110px;
 	opacity:0;
 }
 /*news*/
-#news{margin: 0 auto;
+#news{background-color:#F0EFEF;margin: 0 auto;
     max-width: 640px;
     min-width: 320px;
 	overflow-x: hidden;}
@@ -2475,12 +2475,12 @@ margin-left:-110px;
 	display: block;
 }
 #news .more{
-	border: 1px solid #efefef;
+    border: 1px solid #E0E0E0;
 	-webkit-border-radius:26px;
 	-moz-border-radius:26px;
 	border-radius:26px;
 	cursor: pointer;
-	background-color:#f7f7f7;
+	background-color:#FFFFFF;
 	margin:10px 0;
 	padding:10px;
 	text-align:center;
