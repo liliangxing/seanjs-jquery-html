@@ -1,24 +1,27 @@
 var scrollFlag = true;
 var canScrollFlag = false;
 window.onload = function () {
+    var oWin = document.getElementById("win");
+    var oLay = document.getElementById("overlay");
+    var oBtn = document.getElementById("popmenu");
+    var oClose = document.getElementById("close");
     var right_nav = document.getElementById("right_nav");
     var right_nav_click = document.getElementById("right_nav_click");
     right_nav_click.onclick = function () {
         right_nav.style.display = "block";
         right_nav_click.style.display = "none"
     };
+    oBtn.onclick = function () {
+        oLay.style.display = "block";
+        oWin.style.display = "block"
+    };
+    oLay.onclick = function () {
+        oLay.style.display = "none";
+        oWin.style.display = "none"
+    }
 };
 
 $(function(){
-        $("#nav_wrap_bg,#popmenu").click(function () {
-        if($("#nav_wrap_bg").is(":visible")){
-            $("#nav_wrap_bg").hide();
-            $("#nav_wrap").hide();
-        }else {
-            $("#nav_wrap_bg").show();
-            $("#nav_wrap").show();
-        }
-    });
     /*$('#gotoVideo').on('click',function(){
         var sc = $(this).attr("data-id");
         var gotoVideo_value=getCookie("gotoVideo"+sc);
