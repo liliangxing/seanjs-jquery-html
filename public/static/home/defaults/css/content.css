@@ -1,5 +1,6 @@
 @charset "utf-8";
 .text_down{margin: 10px 0;}
+div#content {text-align: justify;}
 div#content p{font-size: 1.0625em; line-height: 2; margin: 10px 0;}
 div#content p br{line-height: 2.2;}
 div#content p.qrcode{font-size: 14px;line-height: 1;}
