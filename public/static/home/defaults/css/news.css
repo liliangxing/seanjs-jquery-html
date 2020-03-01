@@ -2310,7 +2310,7 @@ margin-left:-110px;
 .showpic img{
     width: 100%;margin-top: 5px;
 }
-.page-bizinfo{padding:15px 1rem 0 1rem;}
+.page-bizinfo{padding:15px 0.9rem 0 0.9rem; text-align: justify;}
 .page-bizinfo .header #activity-name {
 	font-size:20px;
 	color:#000;

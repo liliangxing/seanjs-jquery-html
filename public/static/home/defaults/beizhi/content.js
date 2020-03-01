@@ -111,7 +111,7 @@ $(function(){
         var i;
         if(data_id=="1.375"){
             i="0";
-        }else if(data_id=="1.2"){
+        }else if(data_id=="1.25"){
             i="1";
         }else {
             i="2";
