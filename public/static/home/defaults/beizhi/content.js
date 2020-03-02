@@ -109,9 +109,9 @@ $(function(){
         $(this).siblings().css("text-decoration","underline");
         $(this).css("text-decoration","");
         var i;
-        if(data_id=="1.375"){
+        if(data_id=="1.25"){
             i="0";
-        }else if(data_id=="1.25"){
+        }else if(data_id=="1.125"){
             i="1";
         }else {
             i="2";
@@ -217,8 +217,6 @@ function highlight(){
             $("#search_btn").css("top","0.3rem");
             $("#search_btn").css("right", (($(window).width()-$("body").width())/2+40) + "px");
             $("#search_btn").css("z-index","3");
-            $("#search_close").css("right", (($(window).width()-$("body").width())/2+5) + "px");
-            $("#search_close").show();
             $(".highlight").eq(i).css("backgroundColor","#ff9632");
             $(".highlight").eq(i).css("color","#000000");
         }else{
@@ -229,6 +227,8 @@ function highlight(){
             $('#tip').show();
             $("#tip").offset({ top: _top, left: _left });
         }
+        $("#search_close").css("right", (($(window).width()-$("body").width())/2+5) + "px");
+        $("#search_close").show();
         var _tWidth =  $(".highlight").eq(i).width();
         $("#tip").css("width",_tWidth);
         $("html, body").animate({ scrollTop: _top - 92 });
