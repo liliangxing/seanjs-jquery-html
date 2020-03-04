@@ -18,4 +18,8 @@ http://localhost:8890/admin.php
 ```
 账号：admin  密码：123456
 
+kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
+完善后台播放
+2020-03-04 去掉android:configChanges="orientation|keyboardHidden|screenSize"，在install debug才得稳定版。
+
 
