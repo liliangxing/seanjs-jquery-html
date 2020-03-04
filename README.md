@@ -22,5 +22,6 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
 完善后台播放
 2020-03-04 去掉android:configChanges="orientation|keyboardHidden|screenSize"，在install debug才得稳定版。
 保留android:configChanges="orientation"
+使用okhttp3下载体验更好
 
 
