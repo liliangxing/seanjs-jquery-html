@@ -24,6 +24,8 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
 保留android:configChanges="orientation"
 使用okhttp3下载体验更好
  mainActivity增加android:launchMode="singleTask"
+ 1.退出播放。偶尔整个退
+ 2.下载左右两文件的问题
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
