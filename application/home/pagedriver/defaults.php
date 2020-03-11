@@ -122,20 +122,15 @@ class defaults extends Paginator
             $html .= $this->getUrlLinks($block['slider']);
         }*/
 
-        $html .=sprintf(
-            '<div class="custom-select-box">
-            <div class="select-box mui-inline">
-                <span id="fisrt" data-val="%s" data-show="0">%s</span>
-                <ul class="custom-option-box">',
-            $this->url($this->currentPage),$this->currentPage);
+        $html .="<select style=\"
+    width: 3rem;
+\" onchange='loadPage(this.value);' id='z'>";
         for ($page = 1; $page <= $this->lastPage; $page++) {
             $html .= sprintf(
-                '<li data-val="%s" %s><span>%s</span></li>',
-                $this->url($page),($this->currentPage== $page?"class=\"active\"":""),$page);
+                '<option value="%s" %s>%s</div>',
+                $this->url($page),($this->currentPage== $page?"selected":""),$page);
         }
-        $html .= sprintf("</ul>
-            </div>                            
-        </div> <a class='tiaozhuan' href='javaScript:gotoPage();'>GO</a>");
+        $html .= sprintf("</select> <a class='tiaozhuan' href='javaScript:gotoPage();'>GO</a>");
 
        /* if (is_array($block['last'])) {
             $html .= $this->getDots();
