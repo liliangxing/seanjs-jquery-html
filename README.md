@@ -29,6 +29,22 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  新窗口全屏
  增加循环播放
  居中美化，缓存模式优化
+ 1.playvideo取消新建窗口 //end
+ 2.分享出去的链接要简洁 //end
+ 3.url不一致，导致文件为0   //end
+ 4.比较删除的条件做兼容   //end
+ 5.科注全改为okhttp下载    //end
+ 6.地址网络不稳定：  //end
+ 
+ 7.退出播放右侧增加关闭图标   //end
+ 8.playvideo=1新窗口打开  //end
+ 
+ 11.stop去掉，加exit  //end
+ 12.初始化的时候下载好 //end
+ 12.fullsreen要记录进度，用resume模式 //end
+ 
+ 9.栏目导航覆盖遮罩不好高度  //end
+ 13.app用回select控件过优化 //end
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
