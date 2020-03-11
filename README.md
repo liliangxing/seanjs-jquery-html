@@ -52,5 +52,6 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
  全屏完美
-
+1.梵音加个文件下载进度  //end
+2.loading的颜色，老可不可以改 //end
 
