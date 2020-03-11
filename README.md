@@ -56,4 +56,5 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
 2.loading的颜色，老可不可以改 //end
 1.分享微信，用原始文字调试，原ponymusic可以的。//end
 4.pony做兼容，测试分享文件 //end
+github地址修改
 
