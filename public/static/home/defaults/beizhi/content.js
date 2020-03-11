@@ -109,7 +109,7 @@ $(function(){
         $(this).siblings().css("text-decoration","underline");
         $(this).css("text-decoration","");
         var i;
-        if(data_id=="1.25"){
+        if(data_id=="1.1875"){
             i="0";
         }else if(data_id=="1.125"){
             i="1";
