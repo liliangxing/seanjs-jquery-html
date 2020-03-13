@@ -48,6 +48,8 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  1.下一首就不是单曲  //end
  2.异步比较文件完整度  //end
  3，返回有点问题  //end 
+ 1.isplay才显示
+ 2.剪贴板为null闪
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
