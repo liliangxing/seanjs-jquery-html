@@ -72,3 +72,4 @@ github地址修改
 note.apk
 永不销毁
 单例模式
+PasteCopyService
