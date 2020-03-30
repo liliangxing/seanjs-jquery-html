@@ -56,6 +56,7 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  1.对下一首的url特殊处理 //end
  2.设为主页加点逻辑，清空历史。//end  NO
  永不销毁
+ service不销毁
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
@@ -73,3 +74,4 @@ note.apk
 永不销毁
 单例模式
 PasteCopyService
+service不销毁
