@@ -57,6 +57,7 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  2.设为主页加点逻辑，清空历史。//end  NO
  永不销毁
  service不销毁
+ 可以横屏返回，显示横竖导航
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
