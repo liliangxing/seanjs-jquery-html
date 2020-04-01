@@ -78,3 +78,4 @@ note.apk
 单例模式
 PasteCopyService
 service不销毁
+您有200个字以上新的剪贴内容
