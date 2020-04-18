@@ -193,7 +193,7 @@
         {if ($_GET[playVideo] eq '1' && $data.video_url neq '')|| ($_GET[playSound] eq '1' && $data.sound_url neq '') }
         <a class="more"  href="?playSound=0">返回文字版</a>
         {/if}
-        {if $data.sound_url neq ''}
+        {if $data.sound_url neq '' && $_GET[playVideo] neq '1'}
         <span id="mediaPlay" data-id="{$data.sound_url}" class="more">用安卓下载播放mp3</span>
         {/if}
 
