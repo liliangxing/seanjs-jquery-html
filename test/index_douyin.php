@@ -25,7 +25,7 @@ if (isset($_GET['title'])==TRUE) {$title="[".$title."]".urldecode($_GET['title']
 <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/public/static/home/defaults/projekktor/projekktor-1.3.09.js"></script>
 <video id="player_a" class="projekktor" poster="/public/static/home/defaults/projekktor/intro.png"
-       title="<?php echo $video;?> " width="100%" height="680" controls>
+       title="<?php echo $video;?> " width="100%" height="540" controls>
     <source src="<?php echo $video;?> " type="video/mp4"/>
 </video>
 <script type="text/javascript">
