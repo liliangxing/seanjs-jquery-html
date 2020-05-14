@@ -4318,7 +4318,7 @@ jQuery(function ($) {
         _init: function (params) {
             this.pp = params.pp || null;
             this.media = $.extend(true, {}, this.media, params.media);
-            this._ap = params.autoplay;
+            this._ap = true;
             this._isFullscreen = params.fullscreen;
             this._id = $p.utils.randomId(8);
             this._quality = params.quality || this._quality;
