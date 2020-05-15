@@ -31,6 +31,7 @@ if (isset($_GET['title'])==TRUE) {$title="[".$title."]".urldecode($_GET['title']
     $(document).ready(function () {
         projekktor('#player_a', {
             autoplay: true,
+            loop:true,
             playlist : [
                 {0:{src:'<?php echo $video;?>', type: 'video/mp4'}}
             ]
