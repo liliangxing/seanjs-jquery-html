@@ -25,7 +25,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <title><?php echo $title;?></title>
 </head>
 <body id="news">
-<div class="cover" <?php if (isset($_GET['from'])==TRUE){echo "style=\"display: none\"";}?>>
+<div class="cover" <?php if (isset($_GET['from'])==TRUE ||!isset($_GET['cover_path'])==TRUE){echo "style=\"display: none\"";}?>>
     <div><img width="100%" src="<?php echo $cover_path;?>" /></div>
     <div class="text_down"><?php echo $get_title;?></div>
 </div>
