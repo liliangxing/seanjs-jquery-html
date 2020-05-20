@@ -20,7 +20,6 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>
 </head>
