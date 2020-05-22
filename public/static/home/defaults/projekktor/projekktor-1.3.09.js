@@ -3276,7 +3276,7 @@ projekktorConfig.prototype = {
     stop:                           false,   
     
     /* initial volume on player-startup, 0=muted, 1=max */
-    volume:                         0.5,
+    volume:                         1,
     
     /* a cover which will fill the display on audio-only playback */
     cover:                          '',     
@@ -3288,7 +3288,7 @@ projekktorConfig.prototype = {
     disallowSkip:                   false,
     
     /* if set to TRUE users can not change the volume of the player - neither via API nor through controls */
-    fixedVolume:                    false,
+    fixedVolume:                    true,
     
     /* scaling used for images (playlist items and posters) "fill", "aspectratio" or "none" */
     imageScaling:                   'aspectratio',
