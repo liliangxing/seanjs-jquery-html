@@ -31,8 +31,8 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
 <div class="Listpage">
 <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/public/static/home/defaults/projekktor/projekktor-1.3.09.js"></script>
-<video id="player_a" class="projekktor" poster="<?php echo $cover_path;?>"
-       title="<?php echo $video;?> " style="width:100%;height:44em">
+    <video id="player_a" class="projekktor" poster="<?php echo $cover_path;?>"
+       title="<?php echo $video;?> " style="width:100%;height:44em" controls>
 </video>
 <script type="text/javascript">
     $(document).ready(function () {
