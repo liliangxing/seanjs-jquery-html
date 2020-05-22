@@ -3288,7 +3288,7 @@ projekktorConfig.prototype = {
     disallowSkip:                   false,
     
     /* if set to TRUE users can not change the volume of the player - neither via API nor through controls */
-    fixedVolume:                    true,
+    fixedVolume:                    false,
     
     /* scaling used for images (playlist items and posters) "fill", "aspectratio" or "none" */
     imageScaling:                   'aspectratio',
