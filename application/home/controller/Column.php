@@ -163,6 +163,7 @@ class Column extends Common {
                         'path' => empty($condition) ? $name . '-[PAGE].html' : $name . '-[PAGE].html?condition=' . urlencode($condition) . ''
                 ]];
                 if ('' != $columnInfo['listorder']) {
+                    $columnInfo['listorder']='cname asc,' .$columnInfo['listorder'];
                     if (strpos($columnInfo['listorder'], 'id ') === false) {
                         $columnInfo['listorder'].=',id desc';
                     }
