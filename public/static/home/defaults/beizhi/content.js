@@ -209,7 +209,7 @@ function highlight(){
             var _top = $(".highlight").eq(i).offset().top+$(".highlight").eq(i).height();
 
             var _left = $(".highlight").eq(i).offset().left;
-
+            $("#search_close").val("×");
             $("#tip").show();
             $("#tip").offset({ top: _top, left: _left });
             $("#search_btn").val("下一个 "+(i+1)+"/"+$(".highlight").length+"");
@@ -220,6 +220,7 @@ function highlight(){
             $(".highlight").eq(i).css("backgroundColor","#ff9632");
             $(".highlight").eq(i).css("color","#000000");
         }else{
+            $("#search_close").val("");
             $(".highlight").css("backgroundColor","#ff9632");
             $(".highlight").css("color","#000000");
             var _top = $(".highlight").offset().top+$(".highlight").height();
