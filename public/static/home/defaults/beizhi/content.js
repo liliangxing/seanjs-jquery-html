@@ -220,7 +220,7 @@ function highlight(){
             $(".highlight").eq(i).css("backgroundColor","#ff9632");
             $(".highlight").eq(i).css("color","#000000");
         }else{
-            $("#search_close").html("");
+            $("#search_close").html("&nbsp;");
             $(".highlight").css("backgroundColor","#ff9632");
             $(".highlight").css("color","#000000");
             var _top = $(".highlight").offset().top+$(".highlight").height();
