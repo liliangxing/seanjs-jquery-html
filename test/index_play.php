@@ -1,8 +1,11 @@
 <?php
 session_start();
-$video="http://cdn-media.jingzong.org/mp4/02/02-041/02-041-0508.mp4";
-$title="视频";
-$cover_path="/public/static/home/defaults/projekktor/intro.png";
+set_time_limit(0);//让程序一直执行下去
+$datas = json_decode(file_get_contents("video_data.txt"),true);
+
+$video=$datas['video'] ;
+$title=$datas['title'] ;
+$cover_path=$datas['cover_path'] ;
 if (isset($_GET['video'])==TRUE) {$video=urldecode($_GET['video']); }
 $get_title =  null;
 if (isset($_GET['title'])==TRUE) {
@@ -33,10 +36,30 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
 <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/public/static/home/defaults/projekktor/projekktor-1.3.09.autoplay.js"></script>
     <video id="player_a" class="projekktor" poster="<?php echo $cover_path;?>"
-       title="<?php echo $video;?> " style="width:100%;height:44em" controls>
+       title="<?php echo $title;?> " style="width:100%;height:44em" controls>
 </video>
 <script type="text/javascript">
+    var video_first= "<?php echo $video;?>";
+    function getApi() {
+        //设置时间 5-秒  1000-毫秒  这里设置你自己想要的时间
+        setTimeout(getApi, 1 * 1000);
+        $.ajax({
+            url: "http://www.time24.cn/test/index_push.php",
+            type: "GET",
+            data: {
+            },
+            dataType : 'json',
+            success: function (res) {
+               if(video_first != res.video)
+               {
+                   window.location.reload();
+               }
+            }
+        });
+    }
+
     $(document).ready(function () {
+        getApi();
         projekktor('#player_a', {
             autoplay: true,
             loop:true,
@@ -51,7 +74,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
  <div class="page-bizinfo">
      <div class="text_down" ><?php echo $get_title;?></div>
      <div class="text_down" style="word-wrap: break-word">下载地址：<br/>
-        <a href="<?php echo $video;?> "><?php echo $video;?> </a> <br/>(请用在新的浏览器打开下载)
+        <a href="<?php echo $video;?>"><?php echo $video;?> </a> <br/>(请用在新的浏览器打开下载)
     </div>
  </div>
 </div>
