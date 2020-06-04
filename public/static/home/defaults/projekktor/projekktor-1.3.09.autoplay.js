@@ -7010,10 +7010,6 @@ projekktorDisplay.prototype = {
         this.startButton.unbind().click(function(){
             ref.pp.setPlay();           
         });
-
-        setTimeout(function () {
-            ref.pp.setPlay();
-        }, 500);
     },
 
     syncingHandler: function() {
