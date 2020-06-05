@@ -57,7 +57,6 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
             }
         });
     }
-
     $(document).ready(function () {
         getApi();
         projekktor('#player_a', {
