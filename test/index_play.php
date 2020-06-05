@@ -74,7 +74,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
  <div class="page-bizinfo">
      <div class="text_down" ><?php echo $get_title;?></div>
      <div class="text_down" style="word-wrap: break-word">下载地址：<br/>
-        <a href="<?php echo $video;?>"><?php echo $video;?> </a> <br/>(请用在新的浏览器打开下载)
+        <a href="<?php echo $video;?>" rel="noreferrer" target="_blank"><?php echo $video;?> </a> <br/>(请用在新的浏览器打开下载)
     </div>
  </div>
 </div>

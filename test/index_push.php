@@ -15,9 +15,11 @@ if (isset($_GET['title'])==TRUE) {
 if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']);}
 $data = array("title"=>$title,"video"=>$video,"cover_path"=>$cover_path);
 //将数组存到指定的text文件中
-file_put_contents("video_data.txt",json_encode($data));
-//获取数据
-$datas = json_decode(file_get_contents("video_data.txt"),true);
+$data_txt = json_decode(file_get_contents("video_data.txt"),true);
+//不相同
+if($data['video'] != $data_txt['video'] ) {
+    file_put_contents("video_data.txt", json_encode($data));
+}
 ?>
 <html>
 <head>
@@ -26,13 +28,9 @@ $datas = json_decode(file_get_contents("video_data.txt"),true);
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
-    <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
-    <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>
 </head>
-<body id="news">
-<?php print_r($datas);?>
+<body>
+<?php print_r($data);?>
 </body>
 </html>
