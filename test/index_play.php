@@ -52,7 +52,10 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
             success: function (res) {
                if(video_first != res.video)
                {
-                   window.location.reload();
+                   $("#content_end").prepend("<a href='"+res.video+"' rel=\"noreferrer\" target='_blank'><p>" +
+                       "<img src='"+res.cover_path+"' width='100' />" +
+                       ""+res.title+" </p>");
+                   video_first = res.video;
                }
             }
         });
@@ -70,12 +73,14 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     });
 </script>
 
- <div class="page-bizinfo">
+  <div class="page-bizinfo">
      <div class="text_down" ><?php echo $get_title;?></div>
      <div class="text_down" style="word-wrap: break-word">下载地址：<br/>
         <a href="<?php echo $video;?>" rel="noreferrer" target="_blank"><?php echo $video;?> </a> <br/>(请用在新的浏览器打开下载)
+     </div>
+    <div id="content_end">
     </div>
- </div>
+  </div>
 </div>
 </body>
 </html>
