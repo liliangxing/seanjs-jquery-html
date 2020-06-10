@@ -30,6 +30,11 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>
+    <style>
+        #content_end  img{
+           width: 40%;
+        }
+    </style>
 </head>
 <body id="news">
 <div class="cover" <?php if (isset($_GET['from'])==TRUE ||!((isset($_GET['cover_path'])==TRUE)
@@ -51,7 +56,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
         for(var i =0;i<jsonObj.length;i++){
             var res = jsonObj[i];
             $("#content_end").append("<a href='"+res.artist+"' rel=\"noreferrer\" target='_blank'><p>" +
-                "<img src='"+res.coverPath+"' width='100' />" +
+                "<img src='"+res.coverPath+"'/>" +
                 ""+res.title+" </p>");
         }
     }
@@ -68,7 +73,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
                if(video_first != res.video)
                {
                    $("#content_end").prepend("<a href='"+res.video+"' rel=\"noreferrer\" target='_blank'><p>" +
-                       "<img src='"+res.cover_path+"' width='100' />" +
+                       "<img src='"+res.cover_path+"' />" +
                        ""+res.title+" </p>");
                    video_first = res.video;
                }
