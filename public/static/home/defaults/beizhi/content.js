@@ -220,9 +220,9 @@ function highlight(){
             $(".highlight").eq(i).css("backgroundColor","#ff9632");
             $(".highlight").eq(i).css("color","#000000");
         }else{
-            $("#search_close").html("&nbsp;");
-            $(".highlight").css("backgroundColor","#ff9632");
-            $(".highlight").css("color","#000000");
+            $("#search_close").html("");
+            $(".highlight").css("backgroundColor","#ffffff");
+            $(".highlight").css("color","#ff9632");
             var _top = $(".highlight").offset().top+$(".highlight").height();
             var _left = $(".highlight").offset().left;
             $('#tip').show();
