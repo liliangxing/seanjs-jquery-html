@@ -2,10 +2,12 @@
 session_start();
 if (empty($page)) {$page=1;}
 if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
+if (empty($size)) {$size=100;}
+if (isset($_GET['size'])==TRUE) {$size=$_GET['size']; }
 set_time_limit(0);//让程序一直执行下去
 $datas = json_decode(file_get_contents("video_data.txt"),true);
 $jsonArry = json_decode(file_get_contents("./upload/json_data.txt"));
-$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*100,100));
+$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size));
 $video=$datas['video'] ;
 $title=$datas['title'] ;
 $cover_path=$datas['cover_path'] ;
