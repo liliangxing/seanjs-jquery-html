@@ -53,9 +53,29 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
        title="<?php echo $title;?> " style="width:100%;height:44em" controls>
 </video>
 <script type="text/javascript">
+    //一开始在网上找的，后来加了点自己的进去
+    function transSpecialChar(pageStr) {
+        if (pageStr != undefined && pageStr != "" && pageStr != 'null') {
+            pageStr = pageStr.replace(/\r/g, "\\r");
+            pageStr = pageStr.replace(/\n/g, "\\n");
+            pageStr = pageStr.replace(/\t/g, "\\t");
+            pageStr = pageStr.replace(/\\/g, "\\\\");
+            pageStr = pageStr.replace(/"\[{/g, "[{");
+            pageStr = pageStr.replace(/}]"/g, "}]");
+            // pageStr = pageStr.replace(/("")+/g, '"');
+            pageStr = pageStr.replace(/"{"/g, "{\"");
+            pageStr = pageStr.replace(/"}"/g, "\"}");
+            pageStr = pageStr.replace(/}}"/g, "}}");
+            pageStr = pageStr.replace(/\'/g, "&#39;");
+            pageStr = pageStr.replace(/ /g, "&nbsp;");
+            pageStr = pageStr.replace(/</g, "$lt;");
+            pageStr = pageStr.replace(/>/g, "$gt;");
+        }
+        return pageStr;
+    }
     var video_first= "<?php echo $video;?>";
     function getJsonData() {
-        var jsonStr= '<?php echo $ruleArry;?>';
+        var jsonStr= '<?php echo $ruleArry;?>'.replace(/\"/g,"");
         var jsonObj =  JSON.parse(jsonStr);
         for(var i =0;i<jsonObj.length;i++){
             var res = jsonObj[i];
