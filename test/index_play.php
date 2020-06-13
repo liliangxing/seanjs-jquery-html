@@ -7,7 +7,11 @@ if (isset($_GET['size'])==TRUE) {$size=$_GET['size']; }
 set_time_limit(0);//让程序一直执行下去
 $datas = json_decode(file_get_contents("video_data.txt"),true);
 $jsonArry = json_decode(file_get_contents("./upload/json_data.txt"));
-$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size));
+foreach($jsonArry  as $key => $jsonData){
+    $jsonArry[$key]->artist =  "http://www.time24.cn/test/index_douyin.php?video=".urlencode($jsonData->artist)."&title=".
+        urlencode($jsonData->title)."&cover_path=".urlencode($jsonData->coverPath)."&from=timeline";
+}
+$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size),true);
 $video=$datas['video'] ;
 $title=$datas['title'] ;
 $cover_path=$datas['cover_path'] ;
