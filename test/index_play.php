@@ -70,6 +70,11 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
             pageStr = pageStr.replace(/ /g, "&nbsp;");
             pageStr = pageStr.replace(/</g, "$lt;");
             pageStr = pageStr.replace(/>/g, "$gt;");
+            if (pageStr.indexOf("\"") != -1) {
+               // pageStr = pageStr.replace(new RegExp('(["\"])', 'g'), "\\\"");
+            } else if (pageStr.indexOf("\\") != -1){
+                pageStr = pageStr.replace(new RegExp("([\\\\])", 'g'), "\\\\");
+             }
         }
         return pageStr;
     }
