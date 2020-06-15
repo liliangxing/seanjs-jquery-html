@@ -72,6 +72,7 @@ $(function(){
     }
     if(getUrlParam("playVideo")!=1){
         $(".pre_next_box div").show();
+        $(".pre_next_box").css("margin","0.7rem 0 0.7rem 0");
     }
     $("#goTop,#backTop").click(function () {
         $("#nav_wrap_bg").hide();

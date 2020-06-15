@@ -57,7 +57,7 @@ div#content p.qrcode{font-size: 14px !important;line-height: 1.5;}
 .pre_next{
 	position:relative; width:30px; height:30px;float: right;display: none;
 }
-.pre_next_box{height: 30px;margin-top: 0.7rem;margin-bottom:0.7rem;}
+.pre_next_box{height: 30px;}
 #pre_click{
 	background: url('../img/prev.png') no-repeat ;background-size:30px auto;
 }
