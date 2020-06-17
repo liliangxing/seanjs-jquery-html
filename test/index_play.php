@@ -88,7 +88,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     }
     var video_first= "<?php echo $video;?>";
     function getJsonData() {
-        var jsonStr= transSpecialChar('<?php echo $ruleArry;?>');
+        var jsonStr= '<?php echo $ruleArry;?>';
         var jsonObj =  JSON.parse(jsonStr);
         for(var i =0;i<jsonObj.length;i++){
             var res = jsonObj[i];
