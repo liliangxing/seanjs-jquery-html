@@ -56,7 +56,9 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     //一开始在网上找的，后来加了点自己的进去
     function transSpecialChar(pageStr) {
         if (pageStr != undefined && pageStr != "" && pageStr != 'null') {
-            pageStr = pageStr.replace(/\r/g, "\\r");
+            pageStr = pageStr.replace(/\"/g,"&quot;");
+
+           /* pageStr = pageStr.replace(/\r/g, "\\r");
             pageStr = pageStr.replace(/\n/g, "\\n");
             pageStr = pageStr.replace(/\t/g, "\\t");
             pageStr = pageStr.replace(/\\/g, "\\\\");
@@ -69,7 +71,8 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
             pageStr = pageStr.replace(/\'/g, "&#39;");
             pageStr = pageStr.replace(/ /g, "&nbsp;");
             pageStr = pageStr.replace(/</g, "$lt;");
-            pageStr = pageStr.replace(/>/g, "$gt;");
+            pageStr = pageStr.replace(/>/g, "$gt;");*/
+
             if (pageStr.indexOf("\"") != -1) {
                // pageStr = pageStr.replace(new RegExp('(["\"])', 'g'), "\\\"");
             } else if (pageStr.indexOf("\\") != -1){
