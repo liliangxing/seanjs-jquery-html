@@ -12,9 +12,7 @@ foreach($jsonArry  as $key => $jsonData){
         urlencode($jsonData->title)."&cover_path=".urlencode($jsonData->coverPath)."&from=timeline";
 }
 $ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size),true);
-$escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c");
-$replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b");
-$ruleArry = str_replace($escapers, $replacements, $ruleArry);
+$ruleArry = escapeJsonString($ruleArry);
 $video=$datas['video'] ;
 $title=$datas['title'] ;
 $cover_path=$datas['cover_path'] ;
@@ -25,7 +23,12 @@ if (isset($_GET['title'])==TRUE) {
     $title="[".$title."]".$get_title; }
 if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']);}
 
-
+function escapeJsonString($value) {
+	$escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c");
+	$replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b");
+	$result = str_replace($escapers, $replacements, $value);
+	return $result;
+}
 ?>
 <html>
 <head>
