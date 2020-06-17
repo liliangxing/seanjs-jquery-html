@@ -12,6 +12,9 @@ foreach($jsonArry  as $key => $jsonData){
         urlencode($jsonData->title)."&cover_path=".urlencode($jsonData->coverPath)."&from=timeline";
 }
 $ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size),true);
+$escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c");
+$replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b");
+$ruleArry = str_replace($escapers, $replacements, $ruleArry);
 $video=$datas['video'] ;
 $title=$datas['title'] ;
 $cover_path=$datas['cover_path'] ;
@@ -21,6 +24,8 @@ if (isset($_GET['title'])==TRUE) {
     $get_title =  urldecode($_GET['title']);
     $title="[".$title."]".$get_title; }
 if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']);}
+
+
 ?>
 <html>
 <head>
@@ -56,7 +61,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     //一开始在网上找的，后来加了点自己的进去
     function transSpecialChar(pageStr) {
         if (pageStr != undefined && pageStr != "" && pageStr != 'null') {
-            pageStr = pageStr.replace(/\"/g,"&quot;");
+            //pageStr = pageStr.replace(/\"/g,"&quot;");
 
            /* pageStr = pageStr.replace(/\r/g, "\\r");
             pageStr = pageStr.replace(/\n/g, "\\n");
