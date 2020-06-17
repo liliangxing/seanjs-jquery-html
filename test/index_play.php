@@ -24,8 +24,8 @@ if (isset($_GET['title'])==TRUE) {
 if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']);}
 
 function escapeJsonString($value) {
-	$escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c");
-	$replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b");
+	$escapers = array("\\", "/", "\"", "'","\n", "\r", "\t", "\x08", "\x0c");
+	$replacements = array("\\\\", "\\/", "\\\"","\'", "\\n", "\\r", "\\t", "\\f", "\\b");
 	$result = str_replace($escapers, $replacements, $value);
 	return $result;
 }
@@ -64,12 +64,12 @@ function escapeJsonString($value) {
     //一开始在网上找的，后来加了点自己的进去
     function transSpecialChar(pageStr) {
         if (pageStr != undefined && pageStr != "" && pageStr != 'null') {
-            //pageStr = pageStr.replace(/\"/g,"&quot;");
-
            /* pageStr = pageStr.replace(/\r/g, "\\r");
             pageStr = pageStr.replace(/\n/g, "\\n");
             pageStr = pageStr.replace(/\t/g, "\\t");
             pageStr = pageStr.replace(/\\/g, "\\\\");
+            //pageStr = pageStr.replace(/\"/g,"&quot;");
+
             pageStr = pageStr.replace(/"\[{/g, "[{");
             pageStr = pageStr.replace(/}]"/g, "}]");
             // pageStr = pageStr.replace(/("")+/g, '"');
