@@ -19,6 +19,16 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <meta name="format-detection" content="telephone=no" />
     <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        var customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
+        //修改后的userAgent            
+        Object.defineProperty(navigator, 'userAgent', {
+            value: customUserAgent,
+            writable: false
+        });
+        //打印
+        console.log(navigator.userAgent);
+    </script>
     <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>

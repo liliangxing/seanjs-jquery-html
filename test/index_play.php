@@ -8,7 +8,7 @@ set_time_limit(0);//让程序一直执行下去
 $datas = json_decode(file_get_contents("video_data.txt"),true);
 $jsonArry = json_decode(file_get_contents("./upload/json_data.txt"));
 foreach($jsonArry  as $key => $jsonData){
-    $jsonArry[$key]->artist =  "http://www.time24.cn/test/index_douyin.php?video=".urlencode($jsonData->artist)."&title=".
+    $jsonArry[$key]->url =  "http://www.time24.cn/test/index_douyin.php?video=".urlencode($jsonData->artist)."&title=".
         urlencode($jsonData->title)."&cover_path=".urlencode($jsonData->coverPath)."&from=timeline";
 }
 $ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size),true);
@@ -95,9 +95,10 @@ function escapeJsonString($value) {
         var jsonObj =  JSON.parse(jsonStr);
         for(var i =0;i<jsonObj.length;i++){
             var res = jsonObj[i];
-            $("#content_end").append("<a href='"+res.artist+"' rel=\"noreferrer\" target='_blank'><p>" +
-                "<img src='"+res.coverPath+"'/>" +
-                ""+res.title+" </p>");
+            $("#content_end").append("<a href='"+res.url+"' rel=\"noreferrer\" target='_blank'>" +
+                "<img src='"+res.coverPath+"'/></a>" +
+                "<a href='"+res.artist+"' rel=\"noreferrer\" target='_blank'>" +
+                "<p style='text-decoration: underline; margin: 0.6em 0  1.4em 0;'>"+res.title+" </p></a>");
         }
     }
     function getApi() {
