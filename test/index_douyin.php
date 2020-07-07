@@ -29,7 +29,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
         //打印
         console.log(navigator.userAgent);
     </script>
-    <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>
 </head>

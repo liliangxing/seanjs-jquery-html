@@ -39,7 +39,7 @@ function escapeJsonString($value) {
     <meta name="format-detection" content="telephone=no" />
     <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/public/static/home/defaults/projekktor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/public/static/home/defaults/beizhi/content_common.js"></script>
     <title><?php echo $title;?></title>
     <style>
