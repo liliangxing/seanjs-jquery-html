@@ -58,6 +58,7 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
  永不销毁
  service不销毁
  可以横屏返回，显示横竖导航
+服务不停止，取消导航
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
@@ -72,6 +73,7 @@ github地址修改
 4.分享还带中文  //end
 定时器前置，点击播放弹出光碟
 定时器前置回退
+增加长按点击，滑动分页
 
 note.apk
 永不销毁
@@ -79,3 +81,4 @@ note.apk
 PasteCopyService
 service不销毁
 您有200个字以上新的剪贴内容
+剪贴板服务监听
