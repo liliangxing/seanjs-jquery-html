@@ -85,3 +85,4 @@ PasteCopyService
 service不销毁
 您有200个字以上新的剪贴内容
 剪贴板服务监听
+修复类别修改没保存
