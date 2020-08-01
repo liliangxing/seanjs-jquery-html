@@ -34,11 +34,6 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <title><?php echo $title;?></title>
 </head>
 <body id="news">
-<div class="cover" <?php if (isset($_GET['from'])==TRUE ||!((isset($_GET['cover_path'])==TRUE)
-     && $_GET['cover_path']!='' )){echo "style=\"display: none\"";}?>>
-    <div><img width="100%" src="<?php echo $cover_path;?>" /></div>
-    <div class="text_down"><?php echo $get_title;?></div>
-</div>
 <div class="Listpage">
 <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/public/static/home/defaults/projekktor/projekktor-1.3.09.min.js"></script>
@@ -57,7 +52,6 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
         });
     });
 </script>
-
  <div class="page-bizinfo">
      <div class="text_down" ><?php echo $get_title;?></div>
      <div class="text_down" style="word-wrap: break-word">下载地址：<br/>
