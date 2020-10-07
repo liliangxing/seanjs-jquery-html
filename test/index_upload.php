@@ -18,10 +18,11 @@ function uploadFile()
 //exit();
     }
     $newFile = $dir . "/" . $fileName;
-
+    if (is_file($newFile)){
+        rename($newFile, dirname($newFile) . DIRECTORY_SEPARATOR . time() . '-' . basename($newFile));
+    }
     if (is_uploaded_file($_FILES['file']['tmp_name'])) {
         $res = move_uploaded_file($_FILES['file']['tmp_name'], iconv("gb2312", "UTF-8", $newFile));
-
         if (!$res) {
             echo "fail";
         } else {

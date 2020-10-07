@@ -2,8 +2,8 @@
 session_start();
 if (empty($page)) {$page=1;}
 if (isset($_GET['page'])==TRUE) {$page=$_GET['page']; }
-if (empty($size)) {$size=100;}
-if (isset($_GET['size'])==TRUE) {$size=$_GET['size']; }
+if (empty($pageSize)) {$pageSize=100;}
+if (isset($_GET['pageSize'])==TRUE) {$pageSize=$_GET['pageSize']; }
 set_time_limit(0);//让程序一直执行下去
 $datas = json_decode(file_get_contents("video_data.txt"),true);
 $jsonArry = json_decode(file_get_contents("./upload/json_data.txt"));
@@ -11,7 +11,7 @@ foreach($jsonArry  as $key => $jsonData){
     $jsonArry[$key]->url =  "http://www.time24.cn/test/index_douyin.php?video=".urlencode($jsonData->artist)."&title=".
         urlencode($jsonData->title)."&cover_path=".urlencode($jsonData->coverPath)."&from=timeline";
 }
-$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$size,$size),true);
+$ruleArry = json_encode(array_slice($jsonArry, ($page-1)*$pageSize,$pageSize),true);
 $ruleArry = escapeJsonString($ruleArry);
 $video=$datas['video'] ;
 $title=$datas['title'] ;
@@ -37,6 +37,7 @@ function escapeJsonString($value) {
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="/public/static/home/defaults/css/pages.css">
     <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
@@ -142,6 +143,9 @@ function escapeJsonString($value) {
      </div>
     <div id="content_end">
     </div>
+      <div class="showPages">
+          <div class="pages"><a class="ui button" href="?page=<?php echo $page+1;?>&pageSize=<?php echo $pageSize;?>">下一页</a></div>
+      </div>
   </div>
 </div>
 </body>
