@@ -62,7 +62,7 @@ kezhu.apk 2020-03-03 完善版本，无对比删除未下载完文件的功能
 增加定时功能
 定时器的bug，service里初始化
 fullScreen和科注一致，声道被占用时，暂停播放
-使用singleTop才正常。优化requestAudioFocus()的方式
+优化requestAudioFocus()的方式
  
  kezhufanyin.apk
  自动设置FrameLayout的bottomMargin值，修复直接拿，又匹配不到媒体库，删除文件，重新走下载流程
