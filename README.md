@@ -95,3 +95,4 @@ dywsgj.apk
 根据新版的抖音样式调整
 去重，自动置顶
 修复m.groupCount()的错误问题
+增加RemoteService,pushService
