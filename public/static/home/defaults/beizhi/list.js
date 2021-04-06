@@ -16,18 +16,16 @@ function gotoPage(){
     location.href=url;
 };
 
-$(window).scroll(function () {
-    var sc = $(window).scrollTop();
-    var rwidth = $(window).width() + $(document).scrollLeft();
-    var rheight = $(window).height() + $(document).scrollTop();
-    if (sc > $(window).height() / 2 || sc>100) {
-        $(".showPages").css("display", "block");
-    } else {
-
-        $(".showPages").css("display", "none");
-
-    }
-});
+// $(window).scroll(function () {
+//     var sc = $(window).scrollTop();
+//     if (sc > $(window).height() / 2 || sc>100) {
+//         $(".showPages").css("display", "block");
+//     } else {
+//
+//         $(".showPages").css("display", "none");
+//
+//     }
+// });
 $(document).keydown(function(e){
     var e = e || event,
         keycode = e.which || e.keyCode;
