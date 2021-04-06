@@ -16,20 +16,24 @@ function gotoPage(){
     location.href=url;
 };
 
-// $(window).scroll(function () {
-//     var sc = $(window).scrollTop();
-//     if (sc > $(window).height() / 2 || sc>100) {
-//         $(".showPages").css("display", "block");
-//     } else {
-//
-//         $(".showPages").css("display", "none");
-//
-//     }
-// });
+$(window).scroll(function () {
+    var sc = $(window).scrollTop();
+    if (sc > $(window).height() / 2 || sc>100) {
+        $(".showPages").css("display", "block");
+    } else {
+        $(".showPages").css("display", "none");
+    }
+});
 $(document).keydown(function(e){
     var e = e || event,
         keycode = e.which || e.keyCode;
     if (keycode==13) {
         $(".search_btn").trigger("click");
     }
+});
+
+$(function(){
+  if($(window).height()> 768){
+      $(".showPages").css("display", "block");
+  }
 });
