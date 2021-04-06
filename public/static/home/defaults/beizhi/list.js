@@ -33,7 +33,7 @@ $(document).keydown(function(e){
 });
 
 $(function(){
-  if($(window).height()> 768){
+  if($(window).height()> 600){
       $(".showPages").css("display", "block");
   }
 });
