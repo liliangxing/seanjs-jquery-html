@@ -18,7 +18,7 @@ function gotoPage(){
 
 $(window).scroll(function () {
     var sc = $(window).scrollTop();
-    if (sc > $(window).height() / 2 || sc>100) {
+    if (sc > $(window).height() / 2 || sc>100 || $(window).height()> 600) {
         $(".showPages").css("display", "block");
     } else {
         $(".showPages").css("display", "none");
