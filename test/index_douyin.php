@@ -19,7 +19,7 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <meta name="format-detection" content="telephone=no" />
     <link href="/public/static/home/defaults/css/news.css" rel="stylesheet" type="text/css" />
     <link href="/public/static/home/defaults/css/content.css" rel="stylesheet" type="text/css" />
-1    <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
+    <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
     <script type="text/javascript">
         var customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1";
         //修改后的userAgent            
@@ -45,7 +45,9 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
 </head>
 <body id="news">
 <div class="Listpage">
-<?php  if (!strpos($video, 'video_id')) { ?>
+<?php
+if (isset($_GET['video'])==TRUE){
+    if (!strpos($video, 'video_id')) { ?>
 <link href="/public/static/home/defaults/projekktor/projekktor.style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/public/static/home/defaults/projekktor/projekktor-1.3.09.min.js"></script>
     <video id="player_a" class="projekktor" poster="<?php echo $cover_path;?>"
@@ -66,7 +68,18 @@ if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']
     <?php  }else{ ?>
     <a href="<?php echo $video;?>"  rel="noreferrer"><div class="cover-image"><img src="<?php echo $cover_path;?>"/>
             <div class="ppstart active" data-pp-display-func="startbtn"></div></div></a>
-<?php  } ?>
+<?php  }}?>
+
+    <?php
+    if (isset($_GET['path'])==TRUE){
+        $source=urldecode($_GET['path']);
+        $hello = explode(',',$source);
+        for($index=0;$index<count($hello);$index++)
+        {
+            echo "<img src=".$hello[$index]."/>";echo "</br>";
+        }
+    }
+    ?>
  <div class="page-bizinfo">
      <div class="text_down" ><?php echo $get_title;?></div>
      <div class="text_down" style="word-wrap: break-word">下载地址：<br/>
