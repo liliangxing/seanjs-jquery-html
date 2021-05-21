@@ -1,13 +1,15 @@
 <?php
 session_start();
-$video="http://cdn-media.jingzong.org/mp4/02/02-041/02-041-0508.mp4";
-$title="视频";
+$video="";
+$title="[视频]";
 $cover_path="/public/static/home/defaults/projekktor/intro.png";
-if (isset($_GET['video'])==TRUE) {$video=urldecode($_GET['video']); }
+if (isset($_GET['video'])==TRUE) {$video=urldecode($_GET['video']);}else{
+    $title = "[长图]";
+}
 $get_title =  null;
 if (isset($_GET['title'])==TRUE) {
     $get_title =  urldecode($_GET['title']);
-    $title="[".$title."]".$get_title; }
+    $title=$title.$get_title; }
 if (isset($_GET['cover_path'])==TRUE) {$cover_path=urldecode($_GET['cover_path']);}
 ?>
 <html>
@@ -76,7 +78,7 @@ if (isset($_GET['video'])==TRUE){
         $hello = explode(',',$source);
         for($index=0;$index<count($hello);$index++)
         {
-            echo "<img src=".$hello[$index]."/>";echo "</br>";
+            echo "<img style=\"width:100%;\" src=\"".$hello[$index]."\"/>";echo "</br>";
         }
     }
     ?>
