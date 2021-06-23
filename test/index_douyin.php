@@ -74,12 +74,18 @@ if (isset($_GET['video'])==TRUE){
 
     <?php
     if (isset($_GET['path'])==TRUE){
+    ?>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="/public/static/home/defaults/beizhi/content.js"></script>
+        <?php
         $source=urldecode($_GET['path']);
         $hello = explode(',',$source);
+        echo "<div id=\"content\">";
         for($index=0;$index<count($hello);$index++)
         {
             echo "<img style=\"width:100%;margin:0.2em 0;\" src=\"".$hello[$index]."\"/>";echo "</br>";
         }
+        echo "</div>";
     }
     ?>
  <div class="page-bizinfo">
