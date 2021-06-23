@@ -78,7 +78,7 @@ if (isset($_GET['video'])==TRUE){
         $hello = explode(',',$source);
         for($index=0;$index<count($hello);$index++)
         {
-            echo "<img style=\"width:100%;margin:0 0.2em;\" src=\"".$hello[$index]."\"/>";echo "</br>";
+            echo "<img style=\"width:100%;margin:0.2em 0;\" src=\"".$hello[$index]."\"/>";echo "</br>";
         }
     }
     ?>
